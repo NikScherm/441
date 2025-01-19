@@ -1,4 +1,14 @@
-body, html {
+
+
+body {
+    padding: 0;
+    margin: 0;
+    background-image: url("imgs/water2");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-weight: 300;
     height: 100%;
     font-family: "Times New Roman", serif;
 }
@@ -6,7 +16,11 @@ body, html {
 /* The hero image */
 .hero-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("water1.png");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("jeff.png");
+  background-position: center;
+  background-position: left;
+  background-size: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, .8);
 
   /* Set a specific height */
   height: 50%;
