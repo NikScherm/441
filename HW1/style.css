@@ -1,26 +1,96 @@
-*{
-    margin: 20px;;
-    padding: 0px;
+@media (max-width: 768px) {
+
+    .title-container {
+        display: none;
+    }
+
+    .main-content img {
+        max-width: 100%;
+        height: auto; 
+    }
+@media (max-width: 480px) {
+    .container {
+        font-size: 1.5em;
+    }
+    /*controls paragraph cutoff in mobile*/
+    p {
+        font-size: 14px;
+        line-height: 1.6; 
+        word-wrap: break-word; 
+    }
+    .main-content {
+        padding: 10px; 
+        justify-content: center; 
+        margin: 1px auto; 
+        border: white; 
+        max-width: 100%; 
+        width: 100%; 
+        display:block;
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: flex-start; 
+        min-height: 100vh; /* viewport height! */
+    }
+}
+.rubik-bubbles-regular {
+    font-family: "Rubik Bubbles", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  .courier-prime-regular {
+  font-family: "Courier Prime", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.courier-prime-bold {
+  font-family: "Courier Prime", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.courier-prime-regular-italic {
+  font-family: "Courier Prime", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.courier-prime-bold-italic {
+  font-family: "Courier Prime", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+/*--------------------------------*/
+
+
 }
 html{
     font-family:Arial, Helvetica, sans-serif;
-    color: rgb(24, 49, 131);
+    color: rgb(0, 0, 0);
     text-align: center;
 }
-body{
-    padding:min(50px,7%);
-    background-color: rgb(15, 15, 22);
+
+h1 {
+    
+    font-size: 4rem;
+    font-family: "Rubik Bubbles", serif;
+    text-align: center;
+    color: #ECFFDC;
+  
+    /* Text Shadow Property */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(9, 52, 82);
+  
 }
-h1{
-    margin:30px 0;
-}
+
 .card{
-    padding:14em;
-    
-    
-    background-color: rgba(168, 228, 236, 0.5);
+    padding:2em;
+    min-height: 400px;
+    background-color: rgba(106, 145, 150, 0.5);
     text-align: center;
 }
+/* The hero image */
+
 
 body {
     padding: 0;
@@ -32,51 +102,63 @@ body {
     background-position: center;
     font-weight: 300;
     height: 100%;
-    font-family: "Times New Roman", serif;
+  
+    
 }
 
 
-.about-me-container {
+.container{
+    p {
+        font-family: "Courier Prime", serif; 
+        }
+    .nav{
+    .button {
+        background-color: #1b917d; /* Green */
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        margin: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        width: 150px;
+        height: 45px;
+      }
+    }
+
+
+    .hero-image {
+    
+        
+        /* Set a specific height */
+        height: auto;
+        min-width: 40%;
+        max-width: 90%;
+        /* Position and center the image to scale nicely on all screens */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+      }
+      
+      /* Place text in the middle of the image */
+      .hero-text {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+      }
     min-height: 50vh;
     font-size: 2em;
-}
-.about-me {
-    
     margin: 25vh auto;
     padding: 1em;
     text-align: center;
     width: 75%;
     
     min-width: 300px;
-    background-color: rgba(210, 210, 210, 0.5);
-    @media screen and (max-width: 800px){
-        .left, .main, .right{
-            width:100%;
-        }
-    }
-}
-@media (max-width: 800px) {
-    .about-me-container {
-        font-size: 1.5em;
-    }
-}
-.main-content {
-    justify-content: center; 
-    align-items: center; 
-    flex-wrap: wrap;
-    overflow: auto;
-    background-color: white;
-    padding: 48px; 
-    margin: 80px auto; 
-    border: 5px double #493939;
-    text-align: center;
-    width: 100%;
-    max-width: 1400px;
-    box-sizing: border-box;
-}
- 
-/* The hero image */
+    background-color: rgba(210, 210, 210, 0.1);
 
-
-
-/* Place text in the middle of the image */
+}
