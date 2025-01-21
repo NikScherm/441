@@ -1,96 +1,69 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        
-        <meta charset="utf-8">
-        <title>Nikayla's 441 Site</title>
-        <meta name="author" content="Nikayla Schermer">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./HW1/style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-        </head>
-
-
-
-        
+<head>
+    <meta charset="utf-8">
+    <title>Nikayla's 441 Site</title>
+    <meta name="author" content="Nikayla Schermer">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./HW1/style.css">
+</head>
 <body>
-        
-        <div class="container">
-            <div class="hero-image"></div>
-            <div class="hero-text"><p>This is Jeff, and he is cute.</p>
-                <div class="nav">
-                    <a href="#welcome">
-                        <div class="nav-item"><button class="button">Welcome</button></div>
-                    </a>
-                    <a href="#about-me">
-                        <div class="nav-item"><button class="button">About me</button></div>
-                    </a>
-                    <a href="#interests">
-                        <div class="nav-item"><button class="button">Interests</button></div>
-                    </a>
-                </div>
-            </div>
-            
-            
-            
-            
-
-            <br>
-            <br>
-        <div id="welcome">
-            <div class="card">
-                <h1>Welcome</h1>
-                <p>I have chosen to go with a bubbly theme for this Site as it matches Jeff the shark.I chose Jeff the Shark from Marvel Rivals because it’s a character I’ve recently
-                had a lot of fun playing. Despite how fun he is to use, many players dislike him because his ultimate 
-                ability can wipe out an entire team and win games. I also just think Jeff the Shark is
-                adorable. Marvel Rivals is a competitive FPS, which is typically the type of game I enjoy playing.</p>
-                <img src="./HW1/imgs/float.png">
-        </div>
-    </div>
-<br>
-<br>
-<br>
-        <div id="about-me" >
-                <div class="card">
-                    <h1>About Me</h1>
-                    <p>I am supposed to graduate this semester, My major is Media Arts and I am currently 27</p>
-                    <p>
-                        I was born and raised in Colorado, and I am currently attending the University of Montana.     
-                    </p>
-                    <img src="./HW1/imgs/jeff.gif">
-        </div>
-<br></div>
-<br>
-<br>
-        <div id="interests" >
-            <div class="card">
-
-                <h1>Reflection</h1>
-                <p>Over time, many elderly individuals experience a decline in brain activity and memory. Games can help these individuals 
-                    exercise their brains by engaging in game-play and remembering how to play. Continuing to learn as you age is very important 
-                    for maintaining mental sharpness and cognitive function, which can worsen with age. We should encourage the elderly to play games.
-                     However, I don’t believe the games should be first-person shooters or competitive games like League of Legends, but rather relaxing
-                      options such as Animal Crossing or mobile apps like Candy Crush
-
-                </p>
+     <!-- this is for the 'navigation' -->
+    <div class="container">
+        <div class="hero-image"></div>
+        <div class="hero-text">
+            <p>This is Jeff, and he is cute.</p>
+            <div class="nav">
+                <a href="#welcome">
+                    <button class="button">Welcome</button>
+                </a>
+                <a href="#about-me">
+                    <button class="button">About me</button>
+                </a>
+                <a href="#reflection">
+                    <button class="button">reflection</button>
+                </a>
             </div>
         </div>
-    </div>
 
-
-
-
-
-
+        <!--  end of nav  -->
+        <!--  container for all three sections  -->
+        <div id="welcome" class="card">
+            <h1>Welcome</h1>
+            <p>I have chosen to go with a bubbly theme for this site as it matches Jeff the Shark. 
+                I chose Jeff the Shark from Marvel Rivals because it’s a character I’ve recently had a lot of fun playing. 
+                Despite how fun he is to use, many players dislike him because his ultimate ability can wipe out an entire 
+                team and win games. I also just think Jeff the Shark is adorable. Marvel Rivals is a competitive FPS, which is 
+                typically the type of game I enjoy playing.</p>
+            <img src="./HW1/imgs/float.png" alt="Jeff the Shark">
         </div>
 
+        <div id="about-me" class="card">
+            <h1>About Me</h1>
+            <p>I am supposed to graduate this semester. My major is Media Arts, and I am currently 27.
+            I was born and raised in Colorado, and I am currently attending the University of Montana.
+            My main interests are drawing, playing video games, and watching documentaries. I have been 
+            drawing my whole life as a hobby and I know a bit of French.</p>
+            <img src="./HW1/imgs/jeff.gif" alt="Jeff the Shark gif">
+        </div>
+
+        <div id="reflection" class="card">
+            <h1>Reflection</h1>
+            <p>Over time, many elderly individuals experience a decline in brain activity and memory. 
+                Games can help these individuals exercise their brains by engaging in gameplay and remembering how to play. 
+                Continuing to learn as you age is very important for maintaining mental sharpness and cognitive function, 
+                which can worsen with age. We should encourage the elderly to play games. However, I don’t believe the games 
+                should be first-person shooters or competitive games like League of Legends, but rather relaxing options such 
+                as Animal Crossing or mobile apps like Candy Crush.
+                <br><br>
+                •Nikayla Schermer</p>
+                <img src="./HW1/imgs/threejeff.png" alt="Three jeffs">
+        </div>
+        <!--  end of all three sections  -->
+
+    </div>
 </body>
 </html>
