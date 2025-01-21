@@ -9,9 +9,7 @@
         height: auto; 
     }
 @media (max-width: 480px) {
-    .container {
-        
-    }
+    
     /*controls paragraph cutoff in mobile*/
     p {
         font-size: 0.6em;
