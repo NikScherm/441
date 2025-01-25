@@ -75,7 +75,7 @@ html{
 }
 
 
-
+/* this is the grid background */
 .card{
     border-radius: 15px;
     padding:2em;
@@ -132,6 +132,8 @@ body {
         height: 45px;
         }
     }
+
+/*inside grid*/
 .container{
     img {
         width: 95%;
