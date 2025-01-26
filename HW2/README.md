@@ -1,7 +1,7 @@
 
 https://nikscherm.github.io/441/HW2/
 
-#Reflect on what I created and compare to what GPT/copilot created for me:
+# Reflect on what I created and compare to what GPT/copilot created for me:
 
 I used Copilot, the result that it gave me was precicely what was needed from a technical point of view, obviously the answers were not, but I would have needed to be specific about the answers that I wanted for these. The code being quite simple, it did not make any errors. 
 
