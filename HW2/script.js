@@ -18,9 +18,9 @@ console.log("3. The finals");
 //prints to console : 3 of my favorite artists and their cultural importance.
 console.log("Here are 3 of my favorite artists and their cultural importance:");
 
-console.log("1. artist 1");
-console.log("2. artist 2");
-console.log("3. artist 3");
+console.log("1. Craig Mullins, is known as the father of Digital Art. This has become industry standard and this method of artwork has added to many cultures including our own.");
+console.log("2. abbott thayer, is known as the father of camouflage. Which is now used within warfare, hunting, and documenting animals.");
+console.log("3. leonardo da vinci, who is known for mona lisa,  his actual discoveries for medical science has helped us understand human body and in turn saving many people by his discoveries");
 
 // Prints the answer to the question that pops up in console by using favoriteColor variable to store user input then uses that input to display in console log.
 //note to self ` instead of ",'
