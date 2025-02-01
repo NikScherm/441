@@ -1,0 +1,142 @@
+/*---Smaller devices Tablets*/ /*reused from hw1*/
+@media (max-width: 768px) {
+
+    .title-container {
+        display: none;
+    }
+
+    .main-content img {
+        max-width: 100%;
+        height: auto; 
+    }
+
+}
+/*---controls paragraph cutoff in mobile*/
+@media (max-width: 480px) {
+    
+    p {
+        font-size: 0.6em;
+        line-height: 1.6; 
+        word-wrap: break-word; 
+    }
+    h1 {
+        font-size: 0.6em;
+        word-wrap: break-word; 
+    }
+    .main-content {
+        padding: 6px; 
+        justify-content: center; 
+        margin: 1px auto; 
+        border: white; 
+        max-width: 100%; 
+        width: 100%; 
+        display:block;
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: flex-start; 
+        min-height: 100vh;
+    }
+}
+
+/*END OF DEVICE*/
+
+/*---  fonts start here  ---*/
+  .courier-prime-regular {
+  font-family: "Courier Prime", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.courier-prime-bold {
+  font-family: "Courier Prime", serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.courier-prime-regular-italic {
+  font-family: "Courier Prime", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.courier-prime-bold-italic {
+  font-family: "Courier Prime", serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+html{
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
+/*---  fonts end here  ---*/
+
+body {
+    padding: 0;
+    margin: 0;
+    background-image: url("./imgs/water1.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-weight: 300;
+    height: 100%;
+}
+.buttons {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.4); 
+    border: none;
+    color: rgb(20, 22, 26);
+    padding: 10px 20px;
+    position: relative;/*note to self for stacking*/
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    
+    }
+.story{
+    /*FOR THE IMAGE*/
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    position: relative;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+
+    img {
+        width: 95%;
+    }
+    p {
+        font-family: "Courier Prime", serif; 
+        }
+    
+    h1 {
+        font-size: 2.5rem;
+        font-family: "Rubik Bubbles", serif;
+        text-align: center;
+        color: #ECFFDC;
+  
+    /* Text Shadow Property */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(6, 40, 65,0.75);
+    
+
+        
+    }
+      
+    /* Place text in the middle of the image */
+    border-radius: 10px;
+    min-height: 50vh;
+    font-size: 2em;
+    margin: 0vh auto;
+    padding: 1em;
+    text-align: center;
+    width: 75%;
+    
+    min-width: 300px;
+    background-color: rgba(255, 255, 255, 0.3);
+
+}

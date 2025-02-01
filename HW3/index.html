@@ -4,28 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>week 3</title>
+
+
+
+    <!--stuff added for css-->
+    <link href="https://fonts.googleapis.com/css2?family=Stylish&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     
 </head>
 <body>
+    <!--   BACKGROUND-->
+    <div class="background-image">
     <!--   TITLE   -->
     <h1>
-        Title of interactive story
+        Escape from the Gallows
     </h1>
     
-    <!--   TEXT   -->
+    <!--   TEXT & Options  -->
 
-    <div id="story">
+    <div class ="story">
         <p id="text">
-            [ Initial Story goes here, then options are given, I will use buttons that will hopefully prompt take user input : ]</p>
-        <!--   option is the name of the in the JS file.  -->
+            
+            You've made it over the wall undetected, your belongings are just ahead. You rush toward the door to the lookout tower, only to be met by
+            a lone guard leaving his post late.<br>
+            <em>*this was not the plan*</em> <br>
+            "HALT ! This area is restricted. State your business"<br><br>
+            <em>*You catch a drowsy undertone in his voice, slightly groggy. He recently woke up.*</em>
+        
+        
+        </p>
+        <!--   option is the name of the function,[ option(optionNumber)] in the JS file.  -->
         <div id="buttons">
-            <button onclick="option('one')" > Chose option 1</button>
-            <button onclick="option('two')" > Chose option 2</button>
-            <button onclick="option('three')" > Chose option 3</button>
+            <button class="buttons" onclick="option('one')" > <b>[BRIBE]</b> <em>with sleight of hand you make a coin appear out of nowhere, and flick it in his direction.</em></button>
+            <button class="buttons" onclick="option('two')" > <b>[INTIMIDATION]</b> "The captain of the guard will have your head for sleeping on the job. The prisoner escaped to the north of this tower, I had to leave my barrack for this." </button>
+            <button class="buttons" onclick="option('three')" ><b>[STRENGTH]</b><em> You raise your fists, trying your luck against the fully armored guard</em></button>
         </div>
         
 
     </div>
+<!--note2self : add a button to refresh page to try again at anytime-->
     <script
         src="script.js">
     </script>
