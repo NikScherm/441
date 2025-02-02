@@ -32,7 +32,7 @@ function option(optionNumber) {
                 textDiv.innerHTML = "The guard pockets it. He walks away.";
                 buttonsDiv.innerHTML =
                     `
-            <button class="buttons" onclick="option ('one:one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the lock with the scraps you find around you found along the way </em></button>
+            <button class="buttons" onclick="option ('one:one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the lock with the scraps you find around you along the way </em></button>
             <button class="buttons" onclick="option ('one:two')" > <b>[STRENGTH]</b><em>You wait for the guard to be out of hearing range and try to bust down that door.</em></button>
             `;
 
@@ -53,7 +53,7 @@ function option(optionNumber) {
                 textDiv.innerHTML = "The guard bought it. He begins jogging down the rampart.";
                 buttonsDiv.innerHTML =
                     `
-            <button class="buttons" onclick="option ('two:one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the lock with the scraps you find around you found along the way </em></button>
+            <button class="buttons" onclick="option ('two:one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the lock with the scraps you find around you along the way </em></button>
             <button class="buttons" onclick="option ('two:two')" > <b>[PERSUASION]</b>You address the guard :"Hey air-head ! I didn't have time to equip myself, hand me the keys !"</button>
             <button class="buttons" onclick="option ('two:three')" > <b>[STRENGTH]</b><em>You wait for the guard to be out of hearing range and try to bust down that door.</em></button>
             `;
@@ -74,7 +74,7 @@ function option(optionNumber) {
                 textDiv.innerHTML = "A fight insues, you grapple his spear between your palms, and twist it out of his hands. You send the guard to bed once again with big knock on his helmet.";
                 buttonsDiv.innerHTML =
                     `
-            <button class="buttons" onclick="option ('three:one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the lock with the scraps you find around you found along the way </em>.</button>
+            <button class="buttons" onclick="option ('three:one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the lock with the scraps you find around you along the way </em>.</button>
             <button class="buttons" onclick="option ('three:two')" > <b>[INVESTIGATE]</b><em> You search the guard, and find the corresponding key.</em></button>
             <button class="buttons" onclick="option ('three:three')" > <b>[STRENGTH]</b><em>You try to bust down that door.</em></button>
             `;
@@ -101,7 +101,7 @@ function option(optionNumber) {
                 textDiv.innerHTML = "You succesfully pick the lock: in the room you see your weapons, some rope, and you sense that your personal belongings may be inside that padlocked chest.";
                 buttonsDiv.innerHTML =
                     `
-            <button class="buttons" onclick="option ('one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the padlock with the scraps you find around you found along the way </em></button>
+            <button class="buttons" onclick="option ('one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the padlock with the scraps you find around you along the way </em></button>
             <button class="buttons" onclick="option ('two')" > <b>[STRENGTH]</b><em>You bust the lock with a helmet that is lying around.</em></button>
             `;
 
@@ -124,7 +124,7 @@ function option(optionNumber) {
                 textDiv.innerHTML = "You succesfully bust the door down: in the room you see your weapons, some rope, and you sense that your personal belongings may be inside that padlocked chest.";
                 buttonsDiv.innerHTML =
                     `
-            <button class="buttons" onclick="option ('one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the padlock with the scraps you find around you found along the way </em></button>
+            <button class="buttons" onclick="option ('one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the padlock with the scraps you find around you along the way </em></button>
             <button class="buttons" onclick="option ('two')" > <b>[STRENGTH]</b><em>You bust the lock with a helmet that is lying around.</em></button>
             `;
 
@@ -173,7 +173,7 @@ function option(optionNumber) {
             textDiv.innerHTML = "You succesfully enter the room: in the room you see your weapons, some rope, and you sense that your personal belongings may be inside that padlocked chest.";
                 buttonsDiv.innerHTML =
                     `
-                        <button class="buttons" onclick="option ('one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the padlock with the scraps you find around you found along the way </em></button>
+                        <button class="buttons" onclick="option ('one')" > <b>[LOCKPICK]</b> <em> with sleight of hand you pick the padlock with the scraps you find around you along the way </em></button>
             <button class="buttons" onclick="option ('two')" > <b>[STRENGTH]</b><em>You bust the lock with a helmet that is lying around.</em></button>
             `;
         }

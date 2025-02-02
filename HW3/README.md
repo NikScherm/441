@@ -19,7 +19,8 @@ For some reason, despite 3 options being in the assignement, there were only eve
 ## 9. Please include a ReadMe that discusses your successes, challenges, and how you overcame them.
 Most happy with the success of centering the return of dice roll number on top of the image in css...
 
-Another challenge was making sure the text would fit in the buttons. I just made a new button for each option. "<button class="buttons" onclick="option..."
+Another challenge was making sure the text would fit in the buttons. I just made a new button for each option.
 
 The part that I thought was most challenging was trying not to get lost in the questions and appropriate paths to the story.
 I just tried to look into how to refactor the text in a way that makes it easier to add to it later on, I will be doing so down the line. For now, I will just pay extra attention to my notes. The nested if/else if/else statements are confusing.
+https://nikscherm.github.io/441/HW3/
