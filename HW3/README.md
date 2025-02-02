@@ -1,4 +1,4 @@
-
+Note : not all options have multiple outcomes, but there are 3 stages to the story(StoryPage==0 ->StoryPage==2), but the story branches out to multiple possibilities, then back into 3 final outcomes.
 
 ## 8. Use ChatGPT, CoPilot or Gemini to recreate the homework assignement. Reflect on its creation. What did you like ? What didn't you like ?
 
