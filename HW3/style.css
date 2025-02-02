@@ -41,61 +41,56 @@
 /*END OF DEVICE*/
 
 /*---  fonts start here  ---*/
-  .courier-prime-regular {
-  font-family: "Courier Prime", serif;
-  font-weight: 400;
-  font-style: normal;
+.medievalsharp-regular {
+    font-family: "MedievalSharp", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+.average-regular {
+    font-family: "Average", serif;
+    font-weight: 400;
+    font-style: normal;
 }
+  
 
-.courier-prime-bold {
-  font-family: "Courier Prime", serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.courier-prime-regular-italic {
-  font-family: "Courier Prime", serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.courier-prime-bold-italic {
-  font-family: "Courier Prime", serif;
-  font-weight: 700;
-  font-style: italic;
-}
+  
 
 html{
     color: rgb(0, 0, 0);
     text-align: center;
+
 }
 /*---  fonts end here  ---*/
 
 body {
     padding: 0;
     margin: 0;
-    background-image: url("./imgs/water1.jpg");
+    background-image: url("./imgs/green_pattern_bg.png");
     background-attachment: fixed;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: repeat;
     background-position: center;
     font-weight: 300;
     height: 100%;
 }
-.buttons {
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.4); 
-    border: none;
-    color: rgb(20, 22, 26);
-    padding: 10px 20px;
-    position: relative;/*note to self for stacking*/
-    margin: 10px;
+p{
+    font-family: "Average", serif;
+    border-radius: 10px;
+    min-height: 50vh;
+    background-color: rgba(255, 241, 211, 0.526); 
+}
+h1 {
+    font-size: 2.5rem;
+    font-family: "MedievalSharp", serif;
     text-align: center;
-    text-decoration: none;
-    display: block;
-    font-size: 16px;
+    color: #ffe17f;
+    text-shadow: 2px 2px 0 hsla(36, 84%, 20%, 0.815);
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-block;
+
+
     
-    }
+}
 .story{
     /*FOR THE IMAGE*/
     background-attachment: fixed;
@@ -110,22 +105,10 @@ body {
         width: 95%;
     }
     p {
-        font-family: "Courier Prime", serif; 
-        }
-    
-    h1 {
-        font-size: 2.5rem;
-        font-family: "Rubik Bubbles", serif;
-        text-align: center;
-        color: #ECFFDC;
-  
-    /* Text Shadow Property */
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: rgb(6, 40, 65,0.75);
-    
-
-        
+        font-family: "Average", serif;
     }
+    
+    
       
     /* Place text in the middle of the image */
     border-radius: 10px;
@@ -139,4 +122,52 @@ body {
     min-width: 300px;
     background-color: rgba(255, 255, 255, 0.3);
 
+}
+.buttons {
+    border-radius: 5px;
+    background-color: rgba(255, 241, 211, 0.526); 
+    border: none;
+    color: rgb(20, 22, 26);
+    padding: 10px 20px;
+    position: relative;/*note to self for stacking*/
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    
+    }
+button:hover{ /*mouseover button effect*/
+    color: rgb(255, 196, 0);
+    background-color: rgba(129, 98, 37, 0.486);
+    transform: scale(1.005);
+
+}
+.buttons:active {/*press button effect*/
+    background-color: rgba(255, 222, 102, 0.411); 
+    box-shadow: 0 0 15px rgba(255, 223, 102, 0.8); 
+    transform: scale(0.95); 
+}
+
+.d20-container {
+    position: relative;
+    display: inline-block;
+    width: 100px; /* Adjust based on your image */
+    height: 100px; /* Adjust to match aspect ratio */
+}
+
+.d20 {
+    width: 100%;
+    height: auto;
+}
+
+.dice-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50%;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-family: "Average", serif;
 }

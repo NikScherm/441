@@ -3,21 +3,30 @@
 
 var storyPage = 0; //for now I will use var
 function rollDice(modifier) {
-    const roll = Math.floor(Math.random() * 20) + 1;
+    let roll = Math.floor(Math.random() * 20) + 1;
     return roll + modifier;
+
+
 }
+//function updateDiceOnPage(){}
+
 function option(optionNumber) {
     let textDiv = document.getElementById('text'); //gets the text div
     let buttonsDiv = document.getElementById('buttons'); //gets the story div
-    let storyDiv = document.querySelector('.story'); //querySelector for the CSS
+    let rollResult = 10;//declared variable for roll result
 
+
+
+    //let storyDiv = document.querySelector('.story'); //querySelector for the CSS
+    //I should make a success threshold variable and use that instead of pasting roll over and over.
     if (storyPage === 0) {
         textDiv.innerHTML = "";
         //storyDiv.innerHTML = "<p id='text'> </p>";
 
         if (optionNumber === 'one') {
+        
 
-            let rollResult = rollDice(2);
+            rollResult = rollDice(2);
             console.log(rollResult);
             if(rollResult>=10){
                 textDiv.innerHTML = "The guard pockets it. He walks away.";
@@ -37,7 +46,7 @@ function option(optionNumber) {
 
             }
         } else if (optionNumber === 'two') {
-            let rollResult = rollDice(5);
+            rollResult = rollDice(5);
             console.log(rollResult);
 
             if (rollResult >= 10) {
@@ -58,7 +67,7 @@ function option(optionNumber) {
 
 
         } else if (optionNumber === 'three') {
-            let rollResult = rollDice(-2);
+             rollResult = rollDice(-2);
             console.log(rollResult);
 
             if (rollResult >= 15) {
@@ -79,13 +88,14 @@ function option(optionNumber) {
 
         }
 
+        document.getElementById('diceResult').innerText = rollResult; // Update the text content to show the result
 
         storyPage++;
 
 // ----------------------------------------------------
     } else if (storyPage === 1) {
         if (optionNumber === /*lockpick*/'one:one'||optionNumber === 'two:one'||optionNumber === 'three:one' ) {
-            let rollResult = rollDice(0);
+             rollResult = rollDice(0);
             console.log(rollResult);
             if(rollResult>=10){
                 textDiv.innerHTML = "You succesfully pick the lock: in the room you see your weapons, some rope, and you sense that your personal belongings may be inside that padlocked chest.";
@@ -108,7 +118,7 @@ function option(optionNumber) {
             }
             
         }else if(optionNumber ===/*strength*/ 'one:two' ||optionNumber === 'two:three'||optionNumber === 'three:three' ){
-            let rollResult = rollDice(-2);
+             rollResult = rollDice(-2);
             console.log(rollResult);
             if(rollResult>=10){
                 textDiv.innerHTML = "You succesfully bust the door down: in the room you see your weapons, some rope, and you sense that your personal belongings may be inside that padlocked chest.";
@@ -129,7 +139,7 @@ function option(optionNumber) {
 
             }
         }else if(optionNumber === 'two:onef'|| optionNumber === 'one:twof'/*jumpoff*/ ){
-            let rollResult = rollDice(-8);
+             rollResult = rollDice(-8);
             console.log(rollResult);
             if(rollResult>=10){
                 textDiv.innerHTML = "By some miracle you do not break a bone in your body, you manage to run to the nearest treeline undetected, your belongings gone for good, you will have to start over...";
@@ -141,7 +151,7 @@ function option(optionNumber) {
 
                 /*fight*/
             }else if(optionNumber === 'one:onef' ){
-            let rollResult = rollDice(-3);
+             rollResult = rollDice(-3);
             console.log(rollResult);
             if(rollResult>=10){
                 textDiv.innerHTML = "You grapple the spear, and shove the guard off of the rampart. That was loud.";
@@ -167,6 +177,7 @@ function option(optionNumber) {
             <button class="buttons" onclick="option ('two')" > <b>[STRENGTH]</b><em>You bust the lock with a helmet that is lying around.</em></button>
             `;
         }
+        document.getElementById('diceResult').innerText = rollResult; // Update the text content to show the result
 
         storyPage++;
     }
@@ -177,7 +188,7 @@ function option(optionNumber) {
 
 
         if (optionNumber === 'one' || optionNumber === 'two'/*opens chest with belongins*/ ) {
-            let rollResult = rollDice(0);
+             rollResult = rollDice(0);
             console.log(rollResult);
             if(rollResult>=10){
                 textDiv.innerHTML = "You succesfully open the chest. You find all of your belongings, you grab the rope and climb down the wall. You have managed to escape and retrieve all of your belongings.";
@@ -185,11 +196,12 @@ function option(optionNumber) {
                 <button class="buttons" onclick="option ('one')" ><b>Congratulations</b></button>`;
             }else {
                 textDiv.innerHTML = "You couldn't open the chest. You feel as if there isn't much time, you still have your sword and your larger belongings, you grab the rope and you repel down the wall to freedom.";
+                buttonsDiv.innerHTML ="";
             }
         }
 
         if (optionNumber === 'three' /*flee*/ ) {
-            let rollResult = rollDice(0);
+             rollResult = rollDice(0);
             console.log(rollResult);
             if(rollResult>=10){
                 textDiv.innerHTML = "You have managed to escape, albeit without all of your belongings...";
@@ -199,7 +211,7 @@ function option(optionNumber) {
             }
         }
         if (optionNumber === 'four' /*hasty entry*/ ) {
-            let rollResult = rollDice(0);
+             rollResult = rollDice(0);
             console.log(rollResult);
             if(rollResult>=10){
                 textDiv.innerHTML = "You enter the room in a hurry, you only have a few moments before they come running...";
@@ -218,6 +230,7 @@ function option(optionNumber) {
 
 
         }
+        document.getElementById('diceResult').innerText = rollResult; // Update the text content to show the result
 
         storyPage++;
 
@@ -229,13 +242,13 @@ function option(optionNumber) {
             buttonsDiv.innerHTML ="";
         }
         if (optionNumber === 'two'){
-            textDiv.innerHTML = "You have your freedom atleast.";
+            textDiv.innerHTML = "You have your freedom atleast. But you did not leave with all of your belongings...";
             buttonsDiv.innerHTML ="";
 
             
         }
         if (optionNumber === 'three'){
-            let rollResult = rollDice(0);
+             rollResult = rollDice(0);
             console.log(rollResult);
             if(rollResult==20){
                 textDiv.innerHTML = "Despite all odds, you manage to power through all of the incoming guards, and after a long drawn out fight you have enough time to gather your things and escape.";
@@ -248,6 +261,7 @@ function option(optionNumber) {
         }
 
 
+        document.getElementById('diceResult').innerText = rollResult; // Update the text content to show the result
 
 
 
