@@ -1,0 +1,177 @@
+/*---Smaller devices Tablets*/ /*reused from hw1*/
+@media (max-width: 768px) {
+
+    .title-container {
+        display: none;
+    }
+
+    .main-content img {
+        max-width: 100%;
+        height: auto; 
+    }
+
+}
+/*---controls paragraph cutoff in mobile*/
+@media (max-width: 480px) {
+    
+    p {
+        font-size: 0.6em;
+        line-height: 1.6; 
+        word-wrap: break-word; 
+    }
+    h1 {
+        font-size: 0.6em;
+        word-wrap: break-word; 
+    }
+    .main-content {
+        padding: 6px; 
+        justify-content: center; 
+        margin: 1px auto; 
+        border: white; 
+        max-width: 100%; 
+        width: 100%; 
+        display:block;
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: flex-start; 
+        min-height: 100vh;
+    }
+}
+
+/*END OF DEVICE*/
+
+/*---  fonts start here  ---*/
+.medievalsharp-regular {
+    font-family: "MedievalSharp", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+.average-regular {
+    font-family: "Average", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+
+  
+
+html{
+    color: rgb(0, 0, 0);
+    text-align: center;
+
+}
+/*---  fonts end here  ---*/
+
+body {
+    padding: 0;
+    margin: 0;
+    background-image: url("./imgs/green_pattern_bg.png");
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-position: center;
+    font-weight: 300;
+    height: 100%;
+}
+p{
+    font-family: "Average", serif;
+    border-radius: 10px;
+    min-height: 50vh;
+    background-color: rgba(255, 241, 211, 0.526); 
+}
+h1 {
+    font-size: 2.5rem;
+    font-family: "MedievalSharp", serif;
+    text-align: center;
+    color: #ffe17f;
+    text-shadow: 2px 2px 0 hsla(36, 84%, 20%, 0.815);
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-block;
+
+
+    
+}
+.story{
+    /*FOR THE IMAGE*/
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: 50%;
+    position: relative;
+    background-position: center;
+    height: 100vh;
+    width: 100%;
+
+    img {
+        width: 95%;
+    }
+    p {
+        font-family: "Average", serif;
+    }
+    
+    
+      
+    /* Place text in the middle of the image */
+    border-radius: 10px;
+    min-height: 50vh;
+    font-size: 2em;
+    margin: 0vh auto;
+    padding: 1em;
+    text-align: center;
+    width: 75%;
+    
+    min-width: 300px;
+    background-color: rgba(255, 255, 255, 0.3);
+
+}
+.buttons {
+    border-radius: 5px;
+    background-color: rgba(255, 241, 211, 0.526); 
+    border: none;
+    color: rgb(20, 22, 26);
+    padding: 10px 20px;
+    position: relative;/*note to self for stacking*/
+    margin: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    
+    }
+button:hover{ /*mouseover button effect*/
+    color: rgb(255, 196, 0);
+    background-color: rgba(129, 98, 37, 0.486);
+    transform: scale(1.005);
+
+}
+.buttons:active {/*press button effect*/
+    background-color: rgba(255, 222, 102, 0.411); 
+    box-shadow: 0 0 15px rgba(255, 223, 102, 0.8); 
+    transform: scale(0.95); 
+}
+
+.d20-container {
+    position: relative;
+    display: inline-block;
+    width: 100px; /* Adjust based on your image */
+    height: 100px; /* Adjust to match aspect ratio */
+}
+
+.d20 {
+    width: 100%;
+    height: auto;
+}
+
+.dice-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50%;
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    font-family: "Average", serif;
+}
+
+.hidden {
+    display:none;
+}
