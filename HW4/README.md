@@ -1,8 +1,8 @@
-##HW4
+## HW4
 https://nikscherm.github.io/441/HW4/
 #Built on, and adding to HW3.
 
-#9. Use Generative AI to create a similar piece, please reflect on your experience.
+# 9. Use Generative AI to create a similar piece, please reflect on your experience.
 I used Copilot & GPT and what I notice is that it's got a very clean and readible structure. However it sometimes 'forgot' some of the specific requirements like restart option, or it'll use syntax that I have no yet learned in the course and require a lot of effort in order to better understand the overall code, since I would need to first learn of the new syntax by either prompting it with a question about it, & looking it up on w3schools.
 
 As a result I also learned about a few pieces of syntax or functions and find that using these gen ai tools is a quick way of learning about them rather than having to look up that syntax on various website. It isn't infallible however, so looking them up on a website like w3schools can be beneficial for learning when the explination doesn't quite add up to what I'm testing out.
