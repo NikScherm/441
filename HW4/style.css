@@ -61,6 +61,14 @@ html{
 
 }
 /*---  fonts end here  ---*/
+.story-image img {
+    max-width: 20%;
+    height: auto;
+    display: block; 
+    margin: 0 auto; 
+    border-radius: 10px; 
+
+}
 
 body {
     padding: 0;
@@ -75,7 +83,7 @@ body {
 p{
     font-family: "Average", serif;
     border-radius: 10px;
-    min-height: 50vh;
+    min-height: 35vh;
     background-color: rgba(255, 241, 211, 0.526); 
 }
 h1 {
@@ -120,7 +128,7 @@ h1 {
     width: 75%;
     
     min-width: 300px;
-    background-color: rgba(255, 255, 255, 0.3);
+    /*background-color: rgba(255, 255, 255, 0.3);*/
 
 }
 .buttons {
@@ -173,5 +181,8 @@ button:hover{ /*mouseover button effect*/
 }
 
 .hidden {
+    display:none;
+}
+.hiddenTwo{
     display:none;
 }

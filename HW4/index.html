@@ -38,8 +38,12 @@
                 <!--===   START OF STAT USER TYPE INPUT ===-->
                 <div id="stat-prompt" class="stat-prompt">
 
-                    <p id="prompt-text">You have 9 points to allocate however you wish in strength, dexterity, and
-                        charisma:\n Please start by allocating your desired points to strength:</p>
+                    <p id="prompt-text">Welcome,You have 4 points to allocate however you wish in strength, dexterity,
+                        and charisma:
+                        <br><br>
+                        Please start by allocating your desired points to strength.
+                    </p>
+
                     <input type="number" id="stat-input" min="0" max="9" value="0">
                     <button id="btnSubmit" onclick="submitStat();">Allocate</button>
                 </div>
@@ -51,30 +55,36 @@
                     <p id="text">
                         You're now ready for a small adventure !
                     </p>
-                    </divd>
+                    <div class="story-image">
+                        <img id= "storyImage" src="imgs/treeline.jpg" alt="treeline" >
+                    </div>
                     <div class="d20-container">
                         <img src="imgs/d20.png" alt="D20 Dice" class="d20">
                         <div class="dice-number" id="diceResult">?</div>
                     </div>
-                    
-                    <div id="buttons">
-                       <button class="buttons" onclick="option('one')"> Start Adventure</button>
-                            
-                    </div>
-
                 </div>
-                <div id="totalPoints" class="hidden">0</div>  
-            
 
+
+                <div id="buttons">
+                    <button class="buttons" onclick="option('one')"> Start Adventure</button>
+                </div>
             </div>
+            <div id="totalPoints" class="hidden">0</div>
+            <div id="restartPrompt" class="hiddenTwo">
+                <input type="text" size="30" id="restartInput" value="yes or no" style="display:none">
+                <button id="restartButton" onclick="checkRestart()">Submit</button>
+            </div>
+
+
         </div>
+    </div>
     </div>
 
 
-        <!--note2self : add a button to refresh page to try again at anytime-->
-        <script src="script.js">
-        </script>
-        <!-- [note2self] Calling script here under the defined div, which we will use to change text going forawrd-->
+    <!--note2self : add a button to refresh page to try again at anytime-->
+    <script src="script.js">
+    </script>
+    <!-- [note2self] Calling script here under the defined div, which we will use to change text going forawrd-->
 </body>
 
 </html>
