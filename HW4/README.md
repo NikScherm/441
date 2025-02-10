@@ -1,6 +1,6 @@
 ## HW4
 https://nikscherm.github.io/441/HW4/
-#Built on, and adding to HW3.
+
 
 # 9. Use Generative AI to create a similar piece, please reflect on your experience.
 I used Copilot & GPT and what I notice is that it's got a very clean and readible structure. However it sometimes 'forgot' some of the specific requirements like restart option, or it'll use syntax that I have no yet learned in the course and require a lot of effort in order to better understand the overall code, since I would need to first learn of the new syntax by either prompting it with a question about it, & looking it up on w3schools.
@@ -11,7 +11,7 @@ So breaking down a big project into tiny pieces.
 
 I quickly learned about this syntax (...) when trying to reduce clutter & redundancies, it  allows to handle infinite amounts of number of arguments as an array.
 
-
+# Built on, and adding to HW3.
 I added user input from textbox in the form of stat allocation, the rest is code from hw3 that I reused and added to/changed. 
 What I changed since HW3 : 
 -I replaced the 2 outer if statements with switch statements for better clarity.
