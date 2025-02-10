@@ -11,7 +11,7 @@ So breaking down a big project into tiny pieces.
 
 I quickly learned about this syntax (...) when trying to reduce clutter & redundancies, it  allows to handle infinite amounts of number of arguments as an array.
 
-# Built on, and adding to HW3.
+# Built on, and added to HW3.
 I added user input from textbox in the form of stat allocation, the rest is code from hw3 that I reused and added to/changed. 
 What I changed since HW3 : 
 -I replaced the 2 outer if statements with switch statements for better clarity.
