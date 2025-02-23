@@ -61,10 +61,8 @@ function addToPlayer() {
         console.log("Saved to storage:", localStorage.getItem("playerInfo"));
         console.log(firstName, lastName, age);
         
-        // window.location = "game.html";
-        setTimeout(() => {
-            window.location = "game.html";
-        }, 2000);
+        window.location = "game.html";
+        
     } else {
         alert("Fields not filled."); 
     }
