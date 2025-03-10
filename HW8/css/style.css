@@ -1,0 +1,109 @@
+.image-container {
+    width: 300px;
+    height: 300px;
+    margin-top: 10px;
+    border-radius: 5px;
+
+    max-width: 300px; 
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    display: flex; 
+    margin: 10px auto;
+
+}
+.image-container img {
+    max-width: 100%;  
+    max-height: 100%; 
+    width: auto;  
+    height: auto; 
+    display: block;
+}
+
+@media (min-width: 768px) {
+    img {
+        max-width: 400px; 
+    }
+}
+
+@media (min-width: 1024px) {
+    img {
+        max-width: 500px; 
+    }
+}
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 10px 0;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 400px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+
+#circle {
+    width: 100px;
+    height: 100px;
+    background: rgb(36, 199, 131);
+    position: absolute;
+    left: 46.5%;
+    top: 450px;
+    border-radius: 50px;
+  }
+.star {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(238, 173, 53);
+    border-radius: 50%;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* 5point star shape */
+    display: none;  
+    transform: translate(-50%, -50%);
+}
+
+.diamond {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(189, 22, 22);
+    clip-path: polygon(50% 0%, 0% 50%, 50% 100%, 100% 50%);
+    position: absolute;
+    bottom: 0;
+}
+
+#diamond-left {
+    left: 50px;
+}
+
+#diamond-right {
+    right: 50px;
+}
+
+#image2 {
+    display: none;
+}
