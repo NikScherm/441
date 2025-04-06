@@ -8,6 +8,8 @@ var square1;
 var greenSquares = []; // Array for moving green squares
 var extraSquares = []; // Additional squares appearing over time
 var obstacles = []; /*added into a json, less clutter */
+var collectibles = []; /*Addded collectibles, they give more points than green and aren't randomly generated, they come from json */
+
 var score = 0;
 var timeLeft = 60;
 var timerInterval;
@@ -72,6 +74,16 @@ $.getJSON("data/obstacles.json", function (data) {
     });
     drawSquare();
 });
+/*-= Special collectibles =- */
+$.getJSON("data/collectibles.json", function (data) {
+    data.collectibles.forEach(obj => {
+        let item = new Square(obj.x, obj.y, obj.width, obj.height, obj.color);
+        collectibles.push(item);
+    });
+    drawSquare();
+});
+
+
 
 /*-= teleports greensquares randomly=-*/
 
@@ -149,28 +161,44 @@ function drawSquare() {
         ctx.fillStyle = square.theColor;
         ctx.fillRect(square.theX, square.theY, square.theWidth, square.theHeight);
     });
+    
     /*added obstacles to draw square */
     obstacles.forEach(square => {
         ctx.fillStyle = square.theColor;
         ctx.fillRect(square.theX, square.theY, square.theWidth, square.theHeight);
     });
-
+    collectibles.forEach(square => {
+        ctx.fillStyle = square.theColor;
+        ctx.fillRect(square.theX, square.theY, square.theWidth, square.theHeight);
+    });
 }
-
+/*================= MOVEMENT & COLLISION ================== */
 $(document).ready(function () {
     $(this).keypress(function (event) {
         if (!gameOver) getKey(event); // Only allow input if the game is not over
     });
-});
-function getKey(event) {
-    var char = event.which || event.keyCode;
-    var actualLetter = String.fromCharCode(char);
-    if (actualLetter == "w") moveUp();
-    else if (actualLetter == "s") moveDown();
-    else if (actualLetter == "d") moveRight();
-    else if (actualLetter == "a") moveLeft();
 
-    /*-=green square collision =-*/
+
+}); function getKey(event) {
+    var char = event.which || event.keyCode;
+
+    /*
+    Handle Movement in char (WASD + Arrow Keys)
+    */
+    if (char === 87 || char === 38) { // W or Up Arrow
+        moveUp();
+    }
+    else if (char === 83 || char === 40) { // S or Down Arrow
+        moveDown();
+    }
+    else if (char === 68 || char === 39) { // D or Right Arrow
+        moveRight();
+    }
+    else if (char === 65 || char === 37) { // A or Left Arrow
+        moveLeft();
+    }
+
+    /*gren square collisions */
     greenSquares.forEach(square => {
         if (hasCollided(square1, square)) {
             bonkSound.play();
@@ -180,28 +208,43 @@ function getKey(event) {
         }
     });
 
-    /*-=end of game check when colliding with red square=-*/
+
     extraSquares.forEach(square => {
         if (hasCollided(square1, square)) {
             endGame();
         }
     });
+
     obstacles.forEach(square => {
         if (hasCollided(square1, square)) {
             bonkSound.play();
-            // Reverse the move depending on direction
-            if (actualLetter === "w") moveDown();
-            if (actualLetter === "s") moveUp();
-            if (actualLetter === "a") moveRight();
-            if (actualLetter === "d") moveLeft();
+            if (char === 87 || char === 38) moveDown(); // W or Up Arrow
+            if (char === 83 || char === 40) moveUp(); // S or Down Arrow
+            if (char === 65 || char === 37) moveRight(); // A or Left Arrow
+            if (char === 68 || char === 39) moveLeft(); // D or Right Arrow
         }
     });
+
+    for (let i = collectibles.length - 1; i >= 0; i--) {
+        if (hasCollided(square1, collectibles[i])) {
+            bonkSound.play();
+            score += 5; // Adds extra points for yellow collectibles
+            document.getElementById("score").innerText = score;
+            collectibles.splice(i, 1);
+        }
+    }
+
+    // Redraw the updated game state
     drawSquare();
 }
 
+$(document).ready(function () {
+    $(document).keydown(function (event) {
+        if (!gameOver) getKey(event); 
+    });
+});
 
-
-/* -= Movement function, ensures that players doesn't leave box =-*/
+/*Movement functions ensuring the player doesn't leave the box*/
 function moveUp() {
     if (square1.theY > 0) square1.setY(square1.theY - 10);
 }
@@ -215,12 +258,11 @@ function moveRight() {
     if (square1.theX + square1.theWidth < canvas.width) square1.setX(square1.theX + 10);
 }
 
-/*-= collision detection =-*/
+// Collision detection function
 function hasCollided(object1, object2) {
-    return !(
-        object1.theY + object1.theHeight < object2.theY ||
+    return !(object1.theY + object1.theHeight < object2.theY ||
         object1.theY > object2.theY + object2.theHeight ||
         object1.theX + object1.theWidth < object2.theX ||
-        object1.theX > object2.theX + object2.theWidth
-    );
+        object1.theX > object2.theX + object2.theWidth);
 }
+
