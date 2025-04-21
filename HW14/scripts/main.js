@@ -21,55 +21,13 @@ function createBox() {
 
 
   cube2 = new THREE.Mesh(geometry, material.clone());
-  cube2.material.color.setHex(0xa83232); // different color if you want
+  cube2.material.color.setHex(0xa83232); 
   cube2.position.set(-50, 0, 0);
   cube2.scale.set(15, 15, 15);
   scene.add(cube2);
-  // ///adding face numbers maybe ?
-  // addFaceNumbers(cube);
-  // addFaceNumbers(cube2);
-
+ 
   animate();
 }
-//==================================================================
-
-// //helper function to add the numbers on the icosahedrons. (dice)
-// function addFaceNumbers(mesh) {
-//   const geom = mesh.geometry;
-//   const posAttr = geom.getAttribute('position');
-//   const faceCount = posAttr.count / 3;
-
-//   for (let i = 0; i < faceCount; i++) {
-//     const vA = new THREE.Vector3().fromBufferAttribute(posAttr, i * 3);
-//     const vB = new THREE.Vector3().fromBufferAttribute(posAttr, i * 3 + 1);
-//     const vC = new THREE.Vector3().fromBufferAttribute(posAttr, i * 3 + 2);
-
-//     const center = new THREE.Vector3().addVectors(vA, vB).add(vC).divideScalar(3);
-//     center.applyMatrix4(mesh.matrixWorld); // position relative to scene
-
-//     const label = createTextSprite(i + 1); // face number
-//     label.position.copy(center);
-//     scene.add(label);
-//   }
-// }
-// function createTextSprite(text) {
-//   const canvas = document.createElement('canvas');
-//   const context = canvas.getContext('2d');
-//   canvas.width = 256;
-//   canvas.height = 256;
-//   context.fillStyle = 'white';
-//   context.font = 'bold 100px Arial';
-//   context.textAlign = 'center';
-//   context.textBaseline = 'middle';
-//   context.fillText(text, 128, 128);
-
-//   const texture = new THREE.CanvasTexture(canvas);
-//   const material = new THREE.SpriteMaterial({ map: texture });
-//   const sprite = new THREE.Sprite(material);
-//   sprite.scale.set(5, 5, 1); // adjust size as needed
-//   return sprite;
-// }
-//===========================================================================
 
 
 // animate the first box
