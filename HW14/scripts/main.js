@@ -1,7 +1,18 @@
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 var cube, cube2;
+var dice;
+var diceSpin = { x: 0, y: 0, z: 0 };
 var modelObject;
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
+
+
+
+
+
+
+
 // create the first box
 function createBox() {
   // create a box
@@ -125,10 +136,56 @@ function getControls(camera, renderer) {
   return controls;
 }
 
+/**============================================================================
+ MOUSE CLICK FOR DICE ROLL*/
+window.addEventListener("click", onMouseClick, false); /*this event listener will allow us to interact with mouse */
+function onMouseClick(event) {
+/*helps locate the mouse so that you can still click when camera moves */
+  mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+  mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+  raycaster.setFromCamera(mouse, camera);
+
+  /*checks to see if mouse intersects with dice 2d */
+  if (dice) {
+    var intersects = raycaster.intersectObject(dice, true);
+    if (intersects.length > 0) {
+      /* If spinning, stops.and when stoppeds, starts with new random spin.*/
+      if (diceSpin.x !== 0 || diceSpin.y !== 0 || diceSpin.z !== 0) {
+        diceSpin.x = 0;
+        diceSpin.y = 0;
+        diceSpin.z = 0;
+      } else {
+        diceSpin.x = (Math.random() - 0.5) * 0.2 + 0.1;
+        diceSpin.y = (Math.random() - 0.5) * 0.2 + 0.1;
+        diceSpin.z = (Math.random() - 0.5) * 0.2 + 0.1;
+      }
+    }
+  }
+}
+
 /**
  * Load Nimrud model
  **/
 //read the notes and tips and saw that gltf was supposedly better for optimisation so will be using that instead, so changed OBJLoader to GLTFloader.
+function loadDiceModel() {
+  var loader = new THREE.GLTFLoader();
+  loader.load(
+    "models/dice.gltf",
+    function (gltf) {
+      dice = gltf.scene;
+
+       dice.position.set(0, 0, -25);
+      dice.scale.set(20, 20, 20);
+      dice.rotation.y = Math.PI * 0.5;
+
+      diceSpin.x = (Math.random() - 0.5) * 0.2 + 0.1; 
+      diceSpin.y = (Math.random() - 0.5) * 0.2 + 0.1;
+      diceSpin.z = (Math.random() - 0.5) * 0.2 + 0.1;
+      scene.add(dice);
+    }
+  );
+}
 function loadModel() {
   var loader = new THREE.GLTFLoader();
   loader.load(
@@ -147,6 +204,43 @@ function loadModel() {
     }
   );
 }
+/*CLICK DICE */
+function load3DText() {
+  var loader = new THREE.FontLoader();
+  loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+      var textGeometry = new THREE.TextGeometry('Click The Dice', {
+          font: font,
+          size: 5, 
+          height: 1, 
+          curveSegments: 12, 
+          bevelEnabled: true, 
+          bevelThickness: 0.5, 
+          bevelSize: 0.5, 
+          bevelOffset: 0, 
+          bevelSegments: 5 
+      });
+
+      var textMaterial = new THREE.MeshStandardMaterial({
+          color: 0xffffff 
+      });
+
+      var textMesh = new THREE.Mesh(textGeometry, textMaterial);
+      textMesh.position.set(25, 0, 40); 
+      textMesh.rotation.x = Math.PI*0.5;
+      textMesh.rotation.y = Math.PI*1;
+
+      scene.add(textMesh);
+  });
+}
+
+/* */
+function animateModel() {
+  
+  if (modelObject) {
+    modelObject.rotation.y += 0.01;
+  }
+  requestAnimationFrame(animateModel);
+}
 
 /**
  * Render!
@@ -154,6 +248,11 @@ function loadModel() {
 
 function render() {
   requestAnimationFrame(render);
+  if (dice) {
+    dice.rotation.x += diceSpin.x;
+    dice.rotation.y += diceSpin.y;
+    dice.rotation.z += diceSpin.z;
+  }
   renderer.render(scene, camera);
   controls.update();
 }
@@ -166,7 +265,11 @@ var controls = getControls(camera, renderer);
 
 ///
 var game1 = createBox();
+
 ///
 loadModel();
+
+loadDiceModel();
+load3DText(); 
 
 render();

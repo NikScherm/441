@@ -1,2 +1,9 @@
-body { margin :0l }
-canvas {display: block;}
+body {
+    margin: 0;
+    overflow: hidden;
+  }
+
+  canvas {
+    display: block;
+  }
+
