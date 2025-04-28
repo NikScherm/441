@@ -17,7 +17,7 @@ export class Level2 extends Phaser.Scene {
 
     create() {
         const { width, height } = this.scale;
-        this.bg = this.add.tileSprite(0, 0, width, height, AssetKeys.BACKGROUND).setOrigin(0, 0).setScale(1.1);
+        this.bg = this.add.tileSprite(0, -225, 2000, height, AssetKeys.BACKGROUND).setOrigin(0, 0).setScale(2);
 
         //this.bg = this.add.tileSprite(500, 335, width, height, AssetKeys.BACKGROUND).setScale(1.6);
 
@@ -45,14 +45,14 @@ export class Level2 extends Phaser.Scene {
 
 
 
-        this.add.text(width / 2, height / 2, 'The Underground', {
+        this.add.text(200, height / 2, 'The Underground', {
             fontSize: '32px',
             color: '#ffffff'
         }).setOrigin(0.5);
 
-        this.platforms.create(200, 600, 'ground').setAlpha(0).refreshBody();
-        this.platforms.create(600, 600, 'ground').setAlpha(0).refreshBody();
-        this.platforms.create(800, 600, 'ground').setAlpha(0).refreshBody();
+        for (let x = 0; x <= 2000; x += 200) {
+    this.platforms.create(x, 600, 'ground').setAlpha(1).refreshBody();
+}
 /*CAMERA */
         this.cameras.main.startFollow(this.player, true);  
         this.cameras.main.setBounds(0, 0, 2000, 600); 
@@ -80,7 +80,7 @@ export class Level2 extends Phaser.Scene {
 
     update() {
         this.player.move();
-        this.bg.tilePositionX = this.cameras.main.scrollX * 0.5;
+        this.bg.tilePositionX = this.cameras.main.scrollX * 0.1;
 
 
         if (Phaser.Input.Keyboard.JustDown(this.keyX)) {

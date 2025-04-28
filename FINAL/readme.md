@@ -13,3 +13,9 @@ I plan on making it into a puzzle game where the player must push specific objec
 I will also incorporate simple minigames within that the player must complete to unlock chests ect..
 
 keybinds are AD or arrow keys for left and right, W for interacting with box space for jump, will make a control page thing in a title screen later on
+
+
+#to do 
+- patch bug w/ pumpkins appearing after double pick up input by adding cooldown
+- add spikes that player must patch with pumpkins death = gameover 
+- make inventory stay through levels
