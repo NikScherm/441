@@ -18,6 +18,20 @@ export class Game extends Phaser.Scene {
     }
 
     create() {
+        
+        /*Dev mode that will allow me to quickly get to a scene without having to test interactions do levels ect ect...
+        
+         */
+
+        this.input.keyboard.on('keydown-L', () => {
+            console.log("going to lvl2");
+
+            this.scene.start('Level2');
+            
+        });
+
+
+
         const { width, height } = this.scale;
         this.bg = this.add.tileSprite(500, 335, width, height, AssetKeys.HOUSE).setScale(1.12);
         //this.bg=this.add.tileSprite(0, 350,width,height, AssetKeys.BACKGROUNDCOLOR).setScale(2);
@@ -53,6 +67,10 @@ export class Game extends Phaser.Scene {
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
 
+this.add.text(width / 50, height / 6,  'A, D for left/right.\nW for interact.\nX & C for pickup/drop.', {
+            fontSize: '32px',
+            color: 'white'
+        }).setOrigin(0);
     }
 
     interactWithBoundingBox() {
@@ -62,12 +80,12 @@ export class Game extends Phaser.Scene {
 
 
     update(time) {
-    this.player.move();
+        this.player.move();
 
-    if (this.boundingBox.isPlayerOverlapping(this.player)&& Phaser.Input.Keyboard.JustDown(this.keyW)) {
-        this.interactWithBoundingBox();
+        if (this.boundingBox.isPlayerOverlapping(this.player) && Phaser.Input.Keyboard.JustDown(this.keyW)) {
+            this.interactWithBoundingBox();
+        }
     }
-}
 
 
 }

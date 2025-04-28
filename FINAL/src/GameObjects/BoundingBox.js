@@ -11,7 +11,10 @@ export class BoundingBox extends Phaser.GameObjects.Rectangle {
         I will be using this for things like doors, trapdoors, or anything in background or foreground that can be interacted w/
         */
         this.rectangle = scene.add.rectangle(x, y, width, height, 0x00ff00);
-        this.rectangle.setStrokeStyle(2, 0xff0000);
+
+        
+ /* I will turn this on when I no longer need the visual */
+        //this.rectangle.setAlpha(0);
         
         scene.physics.world.enable(this.rectangle);
         this.rectangle.body.setAllowGravity(false);

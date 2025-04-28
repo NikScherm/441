@@ -1,9 +1,7 @@
 import { Boot } from './scenes/Boot.js';
 
 import { Level2 } from './scenes/Level2.js';
-
 import { Game } from './scenes/Game.js';
-
 
 import { GameOver } from './scenes/GameOver.js';
 import { Preloader } from './scenes/Preloader.js';

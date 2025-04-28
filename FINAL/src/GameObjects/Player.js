@@ -1,4 +1,5 @@
-
+import { Inventory } from './Inventory.js';
+//import {PlaceableObject} from './PlaceableObject.js';
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene, x, y) {
@@ -7,16 +8,33 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.setBounce(0.2);
-        this.setCollideWorldBounds(true);
+        //this.setCollideWorldBounds(true);
         this.setScale(0.5);
         this.cursors = scene.input.keyboard.createCursorKeys();
         this.spaceBar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.keyA = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.keyD = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.keyW = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        this.keyX = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
 
         this.initAnimations(scene);
         this.scene = scene;
+        /*player now has inventory yay */
+        this.inventory = new Inventory(scene);
+
+    }
+
+
+    addToInventory(placeableObject) {
+        this.inventory.add(placeableObject.inventoryKey);
+    }
+
+    removeFromInventory(itemKey) {
+        this.inventory.remove(itemKey);
+    }
+
+    hasItem(itemKey) {
+        return this.inventory.has(itemKey);
     }
 
 
@@ -110,5 +128,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
     }
+
+
 
 }
