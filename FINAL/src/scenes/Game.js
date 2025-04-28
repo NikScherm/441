@@ -1,6 +1,5 @@
-import { Player } from '../gameObjects/Player.js';
-
-import { BoundingBox } from '../gameObjects/BoundingBox.js';
+import { Player } from '../GameObjects/Player.js';
+import { BoundingBox } from '../GameObjects/BoundingBox.js';
 //import { level2 } from '../scenes/level2.js';
 const AssetKeys = {
     HOUSE: 'HOUSE',

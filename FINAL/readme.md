@@ -1,4 +1,4 @@
-https://nikscherm.github.io/441/FINAL2
+https://nikscherm.github.io/441/FINAL
 
 #Platformer puzzle game
 I have decided to do a platformer
