@@ -1,11 +1,13 @@
 
+import { InventoryStore } from '../GameObjects/InventoryStore.js';
 
 export class PlaceableObject extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, texture, inventoryKey) {
+    constructor(scene, x, y, texture, inventoryKey, id) {
         super(scene, x, y, texture);
+        this.id = id; 
 
         this.scene = scene;
-        this.setPosition(x, y);
+        //this.setPosition(x, y); //MAYBE ?
         this.setInteractive();
         this.scene.physics.world.enable(this);
 
@@ -22,12 +24,15 @@ export class PlaceableObject extends Phaser.Physics.Arcade.Sprite {
     }
 
     pickUp(player) {
-        if (!this.isPickedUp) {
-            this.isPickedUp = true;
-            this.setAlpha(0); 
-            player.addToInventory(this); 
-        }
+    if (!this.isPickedUp) {
+        console.log('pickedup', this.inventoryKey);
+        this.isPickedUp = true;
+        InventoryStore.add(this.inventoryKey); 
+         console.log('Inventory after pickup:', InventoryStore.listItems());
+        this.destroy();
     }
+}
+
 
     placeDown(player) {
         if (this.isPickedUp) {
@@ -39,24 +44,12 @@ export class PlaceableObject extends Phaser.Physics.Arcade.Sprite {
         }
     }
     canBePickedUp(player) {
-        const pickupRange = 150; // or whatever feels right
+        const pickupRange = 150;
         const distance = Phaser.Math.Distance.Between(player.x, player.y, this.x, this.y);
         return distance <= pickupRange;
     }
 
-    clone(newX, newY) {
-        const clone = new PlaceableObject(this.scene, newX, newY, this.texture.key, this.inventoryKey);
-        clone.setScale(this.scaleX);
-
-        clone.body.gravity.y = this.body.gravity.y;
-        clone.body.setMass(this.body.mass);
-        clone.body.setDrag(this.body.drag.x, this.body.drag.y);
-        clone.body.setMaxVelocity(this.body.maxVelocity.x, this.body.maxVelocity.y);
-
-        this.scene.physics.add.collider(clone, this.scene.platforms);
-
-        return clone;
-    }
+    
     
     update() {
         

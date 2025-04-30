@@ -1,4 +1,6 @@
-import { Inventory } from './Inventory.js';
+//import { Inventory } from './Inventory.js';
+import { InventoryStore } from './InventoryStore.js';
+
 //import {PlaceableObject} from './PlaceableObject.js';
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
@@ -20,7 +22,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.initAnimations(scene);
         this.scene = scene;
         /*player now has inventory yay */
-        this.inventory = new Inventory(scene);
+        // this.inventory = new Inventory(scene);
+        this.inventory = InventoryStore;
+        // this.inventory = new Set();
 
     }
 
@@ -30,7 +34,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     removeFromInventory(itemKey) {
-        this.inventory.remove(itemKey);
+        this.inventory.delete(itemKey);
     }
 
     hasItem(itemKey) {
@@ -91,7 +95,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'jump') {
             if (this.cursors.left.isDown || this.keyA.isDown) {
-                this.setVelocityX(-160);
+                this.setVelocityX(-190);
                 this.setFlipX(false);
 
 
@@ -100,7 +104,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 }
             }
             else if (this.cursors.right.isDown || this.keyD.isDown) {
-                this.setVelocityX(160);
+                this.setVelocityX(190);
                 this.setFlipX(true);
 
 
