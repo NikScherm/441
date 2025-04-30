@@ -12,7 +12,10 @@ import { generateObjectId } from '../GameObjects/IdGenerator.js';
 const AssetKeys = {
     HOUSE: 'HOUSE',
     BACKGROUND: 'BACKGROUND',
-    BACKGROUNDCOLOR: 'BACKGROUNDCOLOR'
+    BACKGROUNDCOLOR: 'BACKGROUNDCOLOR',
+    LARGE_SPIKE: 'large_spike',
+    MEDIUM_SPIKE: 'medium_spike',
+    SMALL_SPIKE: 'small_spike',
 
 
 }
@@ -42,8 +45,12 @@ export class Level2 extends Phaser.Scene {
         this.player = new Player(this, 50, 450);
         this.player.setScale(0.7);
         this.physics.add.collider(this.player, this.platforms);
+        /*SPIKES  */
+        this.spikes = this.physics.add.group();
+        this.createSpikes();
 
         /*OBJECTS */
+
         this.placeableObject = [];
 
         if (!GameState.initializedLevels.has('Level2')) {
@@ -74,17 +81,18 @@ export class Level2 extends Phaser.Scene {
             });
         }
 
+        /*COLLISIONS */
 
         this.placeableObject.forEach(obj => {
             this.physics.add.collider(obj, this.platforms);
             this.physics.add.collider(this.player, obj);
             /*pumpkins should collide with another when they are placed */
-            this.physics.add.collider(obj, obj);
+            this.physics.add.collider(obj, this.spikes);
 
         });
-
         this.physics.add.collider(this.pumpkinGroup, this.pumpkinGroup);
-
+        this.physics.add.collider(this.spikes, this.player, this.handleSpikeCollision, null, this);
+        this.physics.add.collider(this.placeableObject, this.spikes);
 
 
         /*TEXT */
@@ -99,8 +107,7 @@ export class Level2 extends Phaser.Scene {
         /*CAMERA */
         this.cameras.main.startFollow(this.player, true);
         this.cameras.main.setBounds(0, 0, 2000, 600);
-
-
+        /*CONTROLS */
         this.cursors = this.input.keyboard.createCursorKeys();
         this.spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         /* WASD*/
@@ -120,6 +127,31 @@ export class Level2 extends Phaser.Scene {
         console.log('Player interacted with the green box');
         this.scene.start('Game');
     }
+    createSpikes() {
+        const spikeData = [
+            { x: 600, y: 375, key: AssetKeys.LARGE_SPIKE },
+            { x: 800, y: 375, key: AssetKeys.MEDIUM_SPIKE },
+            { x: 1000, y: 520, key: AssetKeys.SMALL_SPIKE, flipY: true },
+        ];
+
+        spikeData.forEach(data => {
+            const spike = this.spikes.create(data.x, data.y, data.key).setOrigin(0.5, 0.5);
+            if (data.flipY) {
+                spike.setFlipY(true);
+            }
+            this.physics.world.enable(spike);
+            spike.body.setImmovable(true);
+            spike.body.setAllowGravity(false);
+            this.physics.add.collider(this.spikes, this.platforms);
+
+
+        });
+    }
+
+    handleSpikeCollision(player, spike) {
+    this.scene.start('GameOver');
+}
+
 
 
 

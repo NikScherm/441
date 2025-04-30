@@ -1,9 +1,11 @@
 const AssetKeys = {
     HOUSE: 'HOUSE',
     BACKGROUND: 'BACKGROUND',
-    BACKGROUNDCOLOR: 'BACKGROUNDCOLOR'
-    // BACKGROUND:'BACKGROUND',
-    // BACKGROUND:'BACKGROUND'
+    BACKGROUNDCOLOR: 'BACKGROUNDCOLOR',
+    LARGE_SPIKE: 'large_spike',
+    MEDIUM_SPIKE: 'medium_spike',
+    SMALL_SPIKE: 'small_spike'
+
 }
 export class Preloader extends Phaser.Scene {
     constructor() {
@@ -19,7 +21,7 @@ export class Preloader extends Phaser.Scene {
 
         this.load.on('progress', (progress) => {
 
-            
+
             bar.width = 4 + (460 * progress);
 
         });
@@ -32,6 +34,14 @@ export class Preloader extends Phaser.Scene {
 
         this.load.image(AssetKeys.BACKGROUND, 'assets/paralax.png');
         this.load.image(AssetKeys.BACKGROUNDCOLOR, 'assets/backgroundcolor.png');
+
+        this.load.image(AssetKeys.LARGE_SPIKE, 'assets/large_spike.png');
+        this.load.image(AssetKeys.MEDIUM_SPIKE, 'assets/medium_spike.png');
+        this.load.image(AssetKeys.SMALL_SPIKE, 'assets/small_spike.png');
+
+
+
+
 
         this.load.image('house', 'assets/house.png');
 
@@ -55,7 +65,7 @@ export class Preloader extends Phaser.Scene {
     }
 
     create() {
-        
+
 
         this.scene.start('Game');
     }

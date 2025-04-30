@@ -22,6 +22,7 @@ export class Game extends Phaser.Scene {
     }
 
     create() {
+
         /*Dev mode that will allow me to quickly get to a scene without having to test interactions do levels ect ect...
             When I add other levels i'll just add more letters.
          */
