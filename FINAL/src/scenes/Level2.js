@@ -4,6 +4,7 @@ import { PlaceableObject } from '../GameObjects/PlaceableObject.js';
 import { GameState } from '../GameObjects/GameState.js';
 import { generateObjectId } from '../GameObjects/IdGenerator.js';
 
+import { OneWayPlatform } from '../GameObjects/OneWayPlatform.js';
 
 
 
@@ -16,9 +17,14 @@ const AssetKeys = {
     LARGE_SPIKE: 'large_spike',
     MEDIUM_SPIKE: 'medium_spike',
     SMALL_SPIKE: 'small_spike',
-
+    PLATFORM1: 'platform1',
+    PLATFORM2: 'platform2',
+    BUCKET: 'BUCKET',
+    BARREL: 'BARREL',
+    WOOD_PLAT1: 'wood_plat1'
 
 }
+
 export class Level2 extends Phaser.Scene {
 
     constructor() {
@@ -26,10 +32,11 @@ export class Level2 extends Phaser.Scene {
     }
 
     create() {
+
+        this.physics.world.createDebugGraphic();
+        this.physics.world.drawDebug = true;
+
         this.pumpkinGroup = this.add.group();
-
-        /*Small cooldown to avoid rapid keypresses */
-
         console.log('Level2 objects in GameState:', GameState.levels.Level2.placeableObjects);
 
 
@@ -39,11 +46,14 @@ export class Level2 extends Phaser.Scene {
         //this.bg = this.add.tileSprite(500, 335, width, height, AssetKeys.BACKGROUND).setScale(1.6);
 
         this.platforms = this.physics.add.staticGroup();
+        /*this one is for 1 way collision later ( can pass through but not from above)*/
+        this.platforms2 = this.physics.add.staticGroup();
+
 
 
         /*PLAYER */
-        this.player = new Player(this, 50, 450);
-        this.player.setScale(0.7);
+        this.player = new Player(this, 50, 50);
+        this.player.setScale(0.7).setDepth(1);
         this.physics.add.collider(this.player, this.platforms);
         /*SPIKES  */
         this.spikes = this.physics.add.group();
@@ -67,11 +77,12 @@ export class Level2 extends Phaser.Scene {
                 this.pumpkinGroup.add(pumpkin);
 
                 GameState.levels.Level2.placeableObjects.push({ id, x: data.x, y: data.y, key: data.key });
+
             });
 
             GameState.initializedLevels.add('Level2');
         } else {
-            // Recreate pumpkins only if they haven't been picked up
+            /*pumpkins create only if haven't been picked up; */
             GameState.levels.Level2.placeableObjects.forEach(data => {
                 if (!GameState.inventory.has('pumpkin')) {
                     const obj = new PlaceableObject(this, data.x, data.y, data.key, data.key, data.id);
@@ -82,35 +93,72 @@ export class Level2 extends Phaser.Scene {
         }
 
         /*COLLISIONS */
+        OneWayPlatform.create(this, this.platforms, 300, 450, AssetKeys.PLATFORM2);
+
+        /*Platform level creation */
+
+        for (let x = 0; x <= 600; x += 200) {
+            OneWayPlatform.create(this, this.platforms, x, 200, AssetKeys.PLATFORM2);
+        }
+       
+        OneWayPlatform.create(this, this.platforms, 586, 460, AssetKeys.PLATFORM2);
+        OneWayPlatform.create(this, this.platforms, 1407, 460, AssetKeys.PLATFORM2);
+        //by the spikes del later
+        this.platforms.create(793, 540, AssetKeys.PLATFORM1);
+        this.platforms.create(1200, 540, AssetKeys.PLATFORM1);
+
+        this.platforms.create(965, 0, AssetKeys.PLATFORM1)
+            .setDisplaySize(200, 300)
+            .setOrigin(0.5, 0.5)
+            .refreshBody();
+        for (let x = 0; x <= 2000; x += 200) {
+            this.platforms.create(x, 650, AssetKeys.PLATFORM1).setAlpha(1).refreshBody();
+        }
+
 
         this.placeableObject.forEach(obj => {
             this.physics.add.collider(obj, this.platforms);
-            this.physics.add.collider(this.player, obj);
-            /*pumpkins should collide with another when they are placed */
+            this.physics.add.collider(this.player, obj, () => {
+                if ((this.cursors.left.isDown || this.keyA.isDown) || (this.cursors.right.isDown || this.keyD.isDown)) {
+                    this.player.isPushing = true;
+                }
+            });
+
+
+
             this.physics.add.collider(obj, this.spikes);
 
         });
+
         this.physics.add.collider(this.pumpkinGroup, this.pumpkinGroup);
         this.physics.add.collider(this.spikes, this.player, this.handleSpikeCollision, null, this);
         this.physics.add.collider(this.placeableObject, this.spikes);
+        /*platform collisions */
+        this.physics.add.collider(this.placeableObject, this.platforms);
+        this.physics.add.collider(this.player, this.platforms);
 
 
-        /*TEXT */
-        this.add.text(200, height / 2, 'The Underground', {
-            fontSize: '32px',
-            color: '#ffffff'
-        }).setOrigin(0.5);
+        /* WALLS 
+            I couldn't figure out how to have the worldborder follow the camera, so I am using walls in the bigger scenes...
+        */
+        this.walls = this.physics.add.staticGroup();
 
-        for (let x = 0; x <= 2000; x += 200) {
-            this.platforms.create(x, 600, 'ground').setAlpha(1).refreshBody();
-        }
+        const leftWall = this.walls.create(0, 300, 'invisible').setDisplaySize(10, 600).setOrigin(0, 0.5).setVisible(false).refreshBody();;
+        const rightWall = this.walls.create(2490, 300, 'invisible').setDisplaySize(10, 600).setOrigin(0, 0.5).setVisible(false).refreshBody();;
+        const topWall = this.walls.create(1000, 0, 'invisible').setDisplaySize(2000, 10).setOrigin(0.5, 0).setVisible(false).refreshBody();;
+
+        this.physics.add.collider(this.player, this.walls);
+        this.placeableObject.forEach(obj => this.physics.add.collider(obj, this.walls));
+        this.physics.add.collider(this.pumpkinGroup, this.walls);
+
+
+
         /*CAMERA */
         this.cameras.main.startFollow(this.player, true);
         this.cameras.main.setBounds(0, 0, 2000, 600);
-        /*CONTROLS */
+        /*CONTROLS +wasd, S yet to have a use. might make it so player can go through platform1 types with it*/
         this.cursors = this.input.keyboard.createCursorKeys();
         this.spaceBar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-        /* WASD*/
         this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -118,9 +166,18 @@ export class Level2 extends Phaser.Scene {
         this.keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
-        this.boundingBox = new BoundingBox(this, 225, 550, 100, 100);
 
+        /*TEXT */
+        this.add.text(200, height / 2, 'The Underground', {
+            fontSize: '32px',
+            color: '#ffffff'
+        }).setOrigin(0.5);
+        /*I'll use this for interactions...
+            Interacting with doors, ropes, ect...
+         */
+        this.add.image(50, 50, AssetKeys.BUCKET).setScale(1.8);
 
+        this.boundingBox = new BoundingBox(this, 50, 50, 100, 100);
     }
     /*INTERACT */
     interactWithBoundingBox() {
@@ -129,9 +186,23 @@ export class Level2 extends Phaser.Scene {
     }
     createSpikes() {
         const spikeData = [
-            { x: 600, y: 375, key: AssetKeys.LARGE_SPIKE },
-            { x: 800, y: 375, key: AssetKeys.MEDIUM_SPIKE },
-            { x: 1000, y: 520, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 600, y: -100, key: AssetKeys.LARGE_SPIKE },
+            { x: 800, y: -100, key: AssetKeys.MEDIUM_SPIKE },
+            { x: 900, y: 220, key: AssetKeys.MEDIUM_SPIKE },
+            { x: 935, y: 220, key: AssetKeys.MEDIUM_SPIKE },
+            { x: 970, y: 220, key: AssetKeys.MEDIUM_SPIKE },
+            { x: 995, y: 220, key: AssetKeys.MEDIUM_SPIKE },
+            { x: 1030, y: 220, key: AssetKeys.MEDIUM_SPIKE },
+
+
+
+
+            { x: 920, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 960, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 1000, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 1040, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 1080, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
+
         ];
 
         spikeData.forEach(data => {
@@ -149,20 +220,27 @@ export class Level2 extends Phaser.Scene {
     }
 
     handleSpikeCollision(player, spike) {
-    this.scene.start('GameOver');
-}
+        this.scene.start('GameOver');
+    }
 
 
 
 
     update() {
-        this.player.move();
-        this.bg.tilePositionX = this.cameras.main.scrollX * 0.1;
 
+
+        this.player.move();
+
+        if (this.player.isPushing) {
+            this.player.play('push', true);
+        }
+        this.player.isPushing = false;
+        this.bg.tilePositionX = this.cameras.main.scrollX * 0.1;
         /*UPDATE FOR PLACING AND RETRIEVING 
         picks up and adds to invent and to inventorystore
         opposite logic for C key press : it will remove it from inventory and inventoryStore and CREATE a new pumpkin at player pos
         it also removes or saves to gamestate to track if it should or shouldn't be in the game scene when loaded.*/
+
 
         if (Phaser.Input.Keyboard.JustDown(this.keyX)) {
             this.placeableObject.forEach((obj, index) => {
@@ -170,9 +248,9 @@ export class Level2 extends Phaser.Scene {
 
                     if (!obj.isPickedUp) {
                         obj.pickUp(this.player);
-                        //this.player.inventory.add('pumpkin');
+                        
 
-                        this.placeableObject.splice(index, 1); // remove from scene list
+                        this.placeableObject.splice(index, 1);
 
                         const matchIndex = GameState.levels.Level2.placeableObjects.findIndex(data => data.id === obj.id);
                         if (matchIndex !== -1) {
@@ -194,6 +272,9 @@ export class Level2 extends Phaser.Scene {
             const pumpkin = new PlaceableObject(this, this.player.x, this.player.y, 'pumpkin', 'pumpkin', id);
             pumpkin.setScale(1);
             this.placeableObject.push(pumpkin);
+            this.physics.add.collider(this.player, pumpkin, () => {
+                console.log('Collision detected');
+            }, null, this);
             /*Adds collision because it adds the new pumpkin to the group which has collision 
             will come back later to simplify it.*/
             this.pumpkinGroup.add(pumpkin);
@@ -205,8 +286,7 @@ export class Level2 extends Phaser.Scene {
                 key: 'pumpkin'
             });
 
-            this.physics.add.collider(pumpkin, this.platforms);
-            this.physics.add.collider(this.player, pumpkin);
+
 
             this.player.inventory.remove('pumpkin');
             console.log('Placed down a pumpkin');

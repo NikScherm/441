@@ -10,7 +10,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
 
         this.setBounce(0.2);
-        //this.setCollideWorldBounds(true);
+        //this.setCollideWorldBounds(true); will have to use a bunch of walls...
         this.setScale(0.5);
         this.cursors = scene.input.keyboard.createCursorKeys();
         this.spaceBar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -25,6 +25,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         // this.inventory = new Inventory(scene);
         this.inventory = InventoryStore;
         // this.inventory = new Set();
+        this.isPushing = false;
+
 
     }
 
@@ -77,9 +79,24 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
                 frameRate: 10
             });
         }
+        if (!this.scene.anims.exists('push')) {
+            scene.anims.create({
+                key: 'push',
+                frames: scene.anims.generateFrameNumbers('push', { start: 0, end: 15 }),
+                frameRate: 40,
+                repeat: -1
+            });
+        }
+
     }
 
     move() {
+        if (this.isPushing) {
+            if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'push') {
+                this.anims.play('push', true);
+            }
+            return;
+        }
 
         if (this.spaceBar.isDown && this.body.touching.down) {
             this.setVelocityY(-350);
@@ -123,6 +140,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
             }
         }
 
+    this.isPushing = false;
 
     }
     interactWithBoundingBox(boundingBox) {

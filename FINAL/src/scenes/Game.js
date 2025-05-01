@@ -108,10 +108,12 @@ export class Game extends Phaser.Scene {
         this.keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
-        this.add.text(width / 50, height / 6, 'A, D for left/right.\nW for interact.\nX & C for pickup/drop.', {
-            fontSize: '32px',
-            color: 'white'
+        this.add.text(width / 50, height / 6, 'A, D for left/right.\nW for interact.\nX & C for pickup/drop.\n\n "Oh no, I have dropped\nmey key in the well !"', {
+            fontFamily: 'Arial Black', fontSize: 18, color: '#ffffff',
+            stroke: '#000000', strokeThickness: 8,
+            align: 'center'
         }).setOrigin(0);
+       
     }
 
     interactWithBoundingBox() {
