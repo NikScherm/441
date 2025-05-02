@@ -12,16 +12,10 @@ I will be using the assets I made previously
 I plan on making it into a puzzle game where the player must push specific objects into certain locations.
 I will also incorporate simple minigames within that the player must complete to unlock chests ect..
 
-keybinds are AD or arrow keys for left and right, W for interacting with box space for jump, will make a control page thing in a title screen later on
+keybinds : 
+A-D || <- -> for left right,
+W For interacting with exits
+S to jump down 1 sided platforms
+C to drop collectibles
+X to pick up collectibles
 
-#What has been done so far 
-Objects now persist through levels and inventory with thanks to the inventoryStore,js, and GameState.js (pumpkins)
-Basically, a pumpkin is given an id, and key, stored in Gamestate, when not in inventory, and Gamestate also tracks if the player has visited the scenes
-for the first time, through the use of "initializedLevels: new Set()" -> "GameState.initializedLevels.add('levels');" Which should now allow me to add
-puzzle elements that I can scatter through the scenes and the player can collect.
-
-#to do 
-- add spikes that player must patch with pumpkins death = gameover 
-- create level layout
-- add a see-saw
--

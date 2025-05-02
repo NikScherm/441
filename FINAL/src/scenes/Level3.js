@@ -11,6 +11,9 @@ import { OneWayPlatform } from '../GameObjects/OneWayPlatform.js';
 
 
 
+
+
+
 const AssetKeys = {
     HOUSE: 'HOUSE',
     BACKGROUND: 'BACKGROUND',
@@ -26,10 +29,10 @@ const AssetKeys = {
 
 }
 
-export class Level2 extends Phaser.Scene {
+export class Level3 extends Phaser.Scene {
 
     constructor() {
-        super('Level2');
+        super('Level3');
     }
 
     create() {
@@ -38,7 +41,7 @@ export class Level2 extends Phaser.Scene {
         this.physics.world.drawDebug = true;
 
         this.pumpkinGroup = this.add.group();
-        console.log('Level2 objects in GameState:', GameState.levels.Level2.placeableObjects);
+        console.log('Level3 objects in GameState:', GameState.levels.Level3.placeableObjects);
 
 
         const { width, height } = this.scale;
@@ -49,14 +52,13 @@ export class Level2 extends Phaser.Scene {
         this.platforms = this.physics.add.staticGroup();
         /*this one is for 1 way collision later ( can pass through but not from above)*/
         this.platforms2 = this.physics.add.staticGroup();
-
         this.walls = this.physics.add.staticGroup();
 
 
 
 
         /*PLAYER */
-        this.player = new Player(this, 50, 50);
+        this.player = new Player(this, 1000, 225);
         this.player.setScale(0.7).setDepth(1);
         /*SPIKES  */
         this.spikes = this.physics.add.group();
@@ -87,7 +89,7 @@ export class Level2 extends Phaser.Scene {
 
         this.placeableObject = [];
 
-        if (!GameState.initializedLevels.has('Level2')) {
+        if (!GameState.initializedLevels.has('Level3')) {
             const pumpkinData = [
                 { x: 50, y: 290, key: 'pumpkin' },
                 { x: 300, y: 450, key: 'pumpkin' },
@@ -101,14 +103,14 @@ export class Level2 extends Phaser.Scene {
                 this.placeableObject.push(pumpkin);
                 this.pumpkinGroup.add(pumpkin);
 
-                GameState.levels.Level2.placeableObjects.push({ id, x: data.x, y: data.y, key: data.key });
+                GameState.levels.Level3.placeableObjects.push({ id, x: data.x, y: data.y, key: data.key });
 
             });
 
-            GameState.initializedLevels.add('Level2');
+            GameState.initializedLevels.add('Level3');
         } else {
             /*pumpkins create only if haven't been picked up; */
-            GameState.levels.Level2.placeableObjects.forEach(data => {
+            GameState.levels.Level3.placeableObjects.forEach(data => {
                 if (!GameState.inventory.has('pumpkin')) {
                     const obj = new PlaceableObject(this, data.x, data.y, data.key, data.key, data.id);
                     obj.setScale(1);
@@ -117,9 +119,7 @@ export class Level2 extends Phaser.Scene {
             });
         }
 
-        /*COLLISIONS */
-        OneWayPlatform.create(this, this.platforms2, 300, 450, AssetKeys.PLATFORM2);
-
+        
 
 
 
@@ -127,40 +127,32 @@ export class Level2 extends Phaser.Scene {
 
         /*platforms2 */
 
-        for (let x = 0; x <= 600; x += 200) {
-            OneWayPlatform.create(this, this.platforms2, x, 200, AssetKeys.PLATFORM2);
-        }
-
-        OneWayPlatform.create(this, this.platforms2, 100, 340, AssetKeys.PLATFORM2);
-        OneWayPlatform.create(this, this.platforms2, 586, 460, AssetKeys.PLATFORM2);
-        OneWayPlatform.create(this, this.platforms2, 1407, 460, AssetKeys.PLATFORM2);
-        OneWayPlatform.create(this, this.platforms2, 1407, 340, AssetKeys.PLATFORM2);
-        OneWayPlatform.create(this, this.platforms2, 1821, 340, AssetKeys.PLATFORM2);
-        OneWayPlatform.create(this, this.platforms2, 1921, 475, AssetKeys.PLATFORM2);
-
+        // for (let x = 0; x <= 600; x += 200) {
+        //     OneWayPlatform.create(this, this.platforms2, x, 200, AssetKeys.PLATFORM2);
+        // }
+        OneWayPlatform.create(this, this.platforms2, 1000, 300, AssetKeys.PLATFORM2);
 
 
 
 
         /*platforms1 */
-        this.platforms.create(793, 540, AssetKeys.PLATFORM1);
-        this.platforms.create(1200, 540, AssetKeys.PLATFORM1);
-        this.platforms.create(1614, 540, AssetKeys.PLATFORM1);
-        this.platforms.create(1614, 333, AssetKeys.PLATFORM1);
+        //this.platforms.create(793, 540, AssetKeys.PLATFORM1);
+        
 
 
 
 
-        this.platforms.create(965, 0, AssetKeys.PLATFORM1)
-            .setDisplaySize(200, 300)
-            .setOrigin(0.5, 0.5)
-            .refreshBody();
+        // this.platforms.create(965, 0, AssetKeys.PLATFORM1)
+        //     .setDisplaySize(200, 300)
+        //     .setOrigin(0.5, 0.5)
+        //     .refreshBody();
         for (let x = 0; x <= 2000; x += 200) {
             this.platforms.create(x, 650, AssetKeys.PLATFORM1).setAlpha(1).refreshBody();
         }
-
-        /*COLLIDER */
-        
+        /*COLLISIONS */
+        this.physics.add.collider(this.player, this.barrels, () => {
+            this.player.isPushing = true;
+        });
 
 
         this.physics.add.collider(this.barrels, this.platforms);
@@ -172,6 +164,7 @@ export class Level2 extends Phaser.Scene {
             this.physics.add.collider(obj, this.platforms);
             this.physics.add.collider(obj, this.platforms2);
             this.physics.add.collider(obj, this.walls);
+
             this.physics.add.collider(this.player, obj);
             this.physics.add.collider(obj, this.spikes);
 
@@ -186,8 +179,10 @@ export class Level2 extends Phaser.Scene {
 
         /*platforms collisions */
         this.physics.add.collider(this.placeableObject, this.platforms);
+        this.physics.add.collider(this.player, this.platforms);
         /*platforms 2 collisions */
         this.physics.add.collider(this.placeableObject, this.platforms2);
+        this.physics.add.collider(this.player, this.platforms2);
 
 
         /* WALLS 
@@ -198,17 +193,10 @@ export class Level2 extends Phaser.Scene {
         const rightWall = this.walls.create(2000, 300, 'invisible').setDisplaySize(10, 600).setOrigin(0, 0.5).setVisible(false).refreshBody();;
         const topWall = this.walls.create(1000, 0, 'invisible').setDisplaySize(2000, 10).setOrigin(0.5, 0).setVisible(false).refreshBody();;
 
+        this.physics.add.collider(this.player, this.walls);
         this.placeableObject.forEach(obj => this.physics.add.collider(obj, this.walls));
         this.physics.add.collider(this.pumpkinGroup, this.walls);
 
-        /*pushing animation */
-        this.physics.add.collider(this.player, this.barrels, () => {
-            this.player.isPushing = true;
-        });
-
-        this.physics.add.collider(this.player, this.platforms);
-        this.physics.add.collider(this.player, this.platforms2);
-        this.physics.add.collider(this.player, this.walls);
 
 
         /*CAMERA */
@@ -226,49 +214,38 @@ export class Level2 extends Phaser.Scene {
 
 
         /*TEXT */
-        this.add.text(200, height / 2, 'The Underground', {
+        this.add.text(200, height / 2, 'Deeper and deeper', {
             fontSize: '32px',
             color: '#ffffff'
         }).setOrigin(0.5);
-        this.pumpkinCountText = this.add.text(20, 20, 'Pumpkin count: 0', {
-            fontSize: '32px',
-            color: '#ffffff'
-        }).setOrigin(0, 0);
-        this.pumpkinCountText.setScrollFactor(0);
-
         /*I'll use this for interactions...
             Interacting with doors, ropes, ect...
          */
-        this.add.image(50, 50, AssetKeys.BUCKET).setScale(1.8);
 
-        this.boundingBox = new BoundingBox(this, 50, 50, 100, 100);
-        this.boundingBox2 = new BoundingBox(this, 1780, 500, 100, 100);
+        this.boundingBox = new BoundingBox(this, 1000, 225, 100, 100);
+        // this.boundingBox2 = new BoundingBox(this, 1780, 500, 100, 100);
+
     }
-
+    
     /*INTERACT */
     interactWithBoundingBox() {
         console.log('Player interacted with the green box');
-
-        this.time.delayedCall(100, () => this.scene.start('Game'));
-    }
-    interactWithBoundingBox2() {
-        console.log('Player interacted with the green box');
-       this.time.delayedCall(100, () => this.scene.start('Level3'))
-    }
+this.time.delayedCall(100, () => this.scene.start('Level2'))    }
+    // interactWithBoundingBox2() {
+    //     console.log('Player interacted with the green box');
+    //     this.scene.start('Level3');
+    // }
     createSpikes() {
         const spikeData = [
             { x: 600, y: -100, key: AssetKeys.LARGE_SPIKE },
-            { x: 800, y: -100, key: AssetKeys.MEDIUM_SPIKE },
-            { x: 900, y: 220, key: AssetKeys.MEDIUM_SPIKE },
-            { x: 935, y: 220, key: AssetKeys.MEDIUM_SPIKE },
-            { x: 970, y: 220, key: AssetKeys.MEDIUM_SPIKE },
-            { x: 995, y: 220, key: AssetKeys.MEDIUM_SPIKE },
-            { x: 1030, y: 220, key: AssetKeys.MEDIUM_SPIKE },
-            { x: 920, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
-            { x: 960, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
-            { x: 1000, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
-            { x: 1040, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
-            { x: 1080, y: 530, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            
+
+
+
+
+            { x: 920, y: -530, key: AssetKeys.SMALL_SPIKE, flipY: true },
+           
+
         ];
 
         spikeData.forEach(data => {
@@ -279,16 +256,14 @@ export class Level2 extends Phaser.Scene {
             this.physics.world.enable(spike);
             spike.body.setImmovable(true);
             spike.body.setAllowGravity(false);
-        });
+            this.physics.add.collider(this.spikes, this.platforms);
 
-        // if (this.platforms && this.spikes) {
-        //     this.physics.add.collider(this.spikes, this.platforms);
-        // }
+
+        });
     }
 
     handleSpikeCollision(player, spike) {
         this.scene.start('GameOver');
-
     }
 
 
@@ -320,9 +295,9 @@ export class Level2 extends Phaser.Scene {
 
                         this.placeableObject.splice(index, 1);
 
-                        const matchIndex = GameState.levels.Level2.placeableObjects.findIndex(data => data.id === obj.id);
+                        const matchIndex = GameState.levels.Level3.placeableObjects.findIndex(data => data.id === obj.id);
                         if (matchIndex !== -1) {
-                            GameState.levels.Level2.placeableObjects.splice(matchIndex, 1);
+                            GameState.levels.Level3.placeableObjects.splice(matchIndex, 1);
                             console.log(`Removed ${obj.id} from GameState`);
 
                         }
@@ -347,7 +322,7 @@ export class Level2 extends Phaser.Scene {
             will come back later to simplify it.*/
             this.pumpkinGroup.add(pumpkin);
 
-            GameState.levels.Level2.placeableObjects.push({
+            GameState.levels.Level3.placeableObjects.push({
                 id,
                 x: this.player.x,
                 y: this.player.y,
@@ -379,12 +354,10 @@ export class Level2 extends Phaser.Scene {
         if (this.boundingBox.isPlayerOverlapping(this.player) && Phaser.Input.Keyboard.JustDown(this.keyW)) {
             this.interactWithBoundingBox();
         }
-        if (this.boundingBox2.isPlayerOverlapping(this.player) && Phaser.Input.Keyboard.JustDown(this.keyW)) {
-            this.interactWithBoundingBox2();
-        }
+        // if (this.boundingBox2.isPlayerOverlapping(this.player) && Phaser.Input.Keyboard.JustDown(this.keyW)) {
+        //     this.interactWithBoundingBox2();
+        // }
 
-        const pumpkinCount = InventoryStore.getQuantity('pumpkin');
-        this.pumpkinCountText.setText('Pumpkin count: ' + pumpkinCount);
 
 
     }

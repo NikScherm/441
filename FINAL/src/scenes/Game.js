@@ -28,18 +28,18 @@ export class Game extends Phaser.Scene {
          */
 
         this.input.keyboard.on('keydown-L', () => {
-            console.log("going to lvl2");
+            console.log("going to lvl3");
 
-            this.scene.start('Level2');
+            this.scene.start('Level3');
 
         });
-        
+
         /*ADDED PUMPKINS TO A GROUP SO THAT IT CAN LATER BE USED TO COLLIDE WITH SUBSEQUENT ADDED PUMPKINS
         WHILE KEEPING THE PROPERTIES OF "PLACEABLEOBJECT" */
         this.pumpkinGroup = this.add.group();
 
 
-        
+
 
 
 
@@ -113,16 +113,22 @@ export class Game extends Phaser.Scene {
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0);
-       
+
+    }
+    shutdownScene() {
+        this.physics.world.colliders.destroy();
     }
 
     interactWithBoundingBox() {
         console.log('Player interacted with the bounding box!');
-        this.scene.start('Level2');
+        this.time.delayedCall(100, () => this.scene.start('Level2'))
+        this.shutdownScene();
     }
 
 
     update(time) {
+        console.log('Starting new scene:', this.scene.key);
+
         this.player.move();
 
 

@@ -15,7 +15,7 @@ export class PlaceableObject extends Phaser.Physics.Arcade.Sprite {
         this.isPickedUp = false;
         this.isPlaced = false;
         this.body.gravity.y = 1000;
-        this.body.setMass(3);
+        this.body.setMass(1);
         this.scene.add.existing(this);
 
         this.body.setDrag(1000);

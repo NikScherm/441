@@ -1,7 +1,5 @@
-//import { Inventory } from './Inventory.js';
 import { InventoryStore } from './InventoryStore.js';
 
-//import {PlaceableObject} from './PlaceableObject.js';
 export class Player extends Phaser.Physics.Arcade.Sprite {
 
     constructor(scene, x, y) {
@@ -22,9 +20,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
         this.initAnimations(scene);
         this.scene = scene;
         /*player now has inventory yay */
-        // this.inventory = new Inventory(scene);
         this.inventory = InventoryStore;
-        // this.inventory = new Set();
         this.isPushing = false;
 
 
@@ -91,54 +87,45 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     move() {
-        if (this.isPushing) {
-            if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'push') {
-                this.anims.play('push', true);
-            }
-            return;
-        }
-
         if (this.spaceBar.isDown && this.body.touching.down) {
-            this.setVelocityY(-350);
-
-
-            if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'jump') {
-                this.anims.play('jump', true);
-            }
-            return;
-
-        }
-
-
+        this.setVelocityY(-350);
         if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'jump') {
-            if (this.cursors.left.isDown || this.keyA.isDown) {
-                this.setVelocityX(-190);
-                this.setFlipX(false);
-
-
-                if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'runLeft') {
-                    this.anims.play('runLeft', true);
-                }
-            }
-            else if (this.cursors.right.isDown || this.keyD.isDown) {
-                this.setVelocityX(190);
-                this.setFlipX(true);
-
-
-                if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'runRight') {
-                    this.anims.play('runRight', true);
-                }
-            }
-            else {
-
-                this.setVelocityX(0);
-                if (this.body.touching.down) {
-                    if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'idle') {
-                        this.anims.play('idle', true);
-                    }
-                }
-            }
+            this.anims.play('jump', true);
         }
+        return;
+    }
+
+    let moving = false;
+
+    if (this.cursors.left.isDown || this.keyA.isDown) {
+        this.setVelocityX(-190);
+        this.setFlipX(false);
+        moving = true;
+    } else if (this.cursors.right.isDown || this.keyD.isDown) {
+        this.setVelocityX(190);
+        this.setFlipX(true);
+        moving = true;
+    } else {
+        this.setVelocityX(0);
+    }
+
+    if (this.isPushing) {
+        if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'push') {
+            this.anims.play('push', true);
+        }
+    } else if (!this.body.touching.down) {
+        if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'jump') {
+            this.anims.play('jump', true);
+        }
+    } else if (moving) {
+        if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'runRight') {
+            this.anims.play('runRight', true); 
+        }
+    } else {
+        if (!this.anims.isPlaying || this.anims.currentAnim.key !== 'idle') {
+            this.anims.play('idle', true);
+        }
+    }
 
     this.isPushing = false;
 
@@ -146,7 +133,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     interactWithBoundingBox(boundingBox) {
         /* Checks if the player is near the bounding box and W key is pressed (or Up arrow)*/
         if ((this.keyW.isDown || this.scene.cursors.up.isDown) && this.scene.isPlayerNearBoundingBox(this)) {
-            console.log("Player entered");// used for debugging, will remove later
+            console.log("Player entered");
+            /*might add animation player sprite sheet for entering if I have time to make one */
         }
 
     }

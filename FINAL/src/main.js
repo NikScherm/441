@@ -1,6 +1,8 @@
 import { Boot } from './scenes/Boot.js';
 
 import { Level2 } from './scenes/Level2.js';
+import { Level3 } from './scenes/Level3.js';
+
 import { Game } from './scenes/Game.js';
 
 import { GameOver } from './scenes/GameOver.js';
@@ -28,6 +30,7 @@ const config = {
         Preloader,
         Game,
         Level2,
+        Level3,
         GameOver
     ]
 };

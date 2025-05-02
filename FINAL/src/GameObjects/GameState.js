@@ -5,6 +5,9 @@ export const GameState = {
         },
         Level2: {
             placeableObjects: [],
+        },
+        Level3: {
+            placeableObjects: [],
         }
     },
     inventory: new Set(),
