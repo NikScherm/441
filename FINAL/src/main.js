@@ -4,6 +4,7 @@ import { Level2 } from './scenes/Level2.js';
 import { Level3 } from './scenes/Level3.js';
 
 import { Game } from './scenes/Game.js';
+import { House } from './scenes/House.js';
 
 import { GameOver } from './scenes/GameOver.js';
 import { Preloader } from './scenes/Preloader.js';
@@ -31,6 +32,8 @@ const config = {
         Game,
         Level2,
         Level3,
+        House,
+
         GameOver
     ]
 };

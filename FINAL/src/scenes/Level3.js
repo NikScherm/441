@@ -25,8 +25,8 @@ const AssetKeys = {
     PLATFORM2: 'platform2',
     BUCKET: 'BUCKET',
     BARREL: 'BARREL',
-    WOOD_PLAT1: 'wood_plat1'
-
+    WOOD_PLAT1: 'wood_plat1',
+    KEY: 'key'
 }
 
 export class Level3 extends Phaser.Scene {
@@ -119,7 +119,7 @@ export class Level3 extends Phaser.Scene {
             });
         }
 
-        
+
 
 
 
@@ -137,7 +137,7 @@ export class Level3 extends Phaser.Scene {
 
         /*platforms1 */
         //this.platforms.create(793, 540, AssetKeys.PLATFORM1);
-        
+
 
 
 
@@ -197,7 +197,8 @@ export class Level3 extends Phaser.Scene {
         this.placeableObject.forEach(obj => this.physics.add.collider(obj, this.walls));
         this.physics.add.collider(this.pumpkinGroup, this.walls);
 
-
+        /*IMAGES */
+        this.theKey = this.add.image(1900, 520, AssetKeys.KEY).setScale(1.0);
 
         /*CAMERA */
         this.cameras.main.startFollow(this.player, true);
@@ -218,19 +219,48 @@ export class Level3 extends Phaser.Scene {
             fontSize: '32px',
             color: '#ffffff'
         }).setOrigin(0.5);
+        this.pumpkinCountText = this.add.text(20, 20, 'Pumpkin count: 0', {
+            fontSize: '32px',
+            color: '#ffffff'
+        }).setOrigin(0, 0);
+        this.pumpkinCountText.setScrollFactor(0);
+        this.keyCountText = this.add.text(20, 50, 'Key count: 0', {
+            fontSize: '32px',
+            color: '#ffffff'
+        }).setOrigin(0, 0);
+        this.keyCountText.setScrollFactor(0);
+        this.add.text(1900, 475, '  press W \nto pick up\n the key', {
+            fontSize: '16px',
+            color: '#ffffff'
+        }).setOrigin(0.5);
+        
+
+        /*I'll use this for interactions...
+            Interacting with doors, ropes, ect...
+         */
+        this.add.image(50, 50, AssetKeys.BUCKET).setScale(1.8);
+
+        this.boundingBox = new BoundingBox(this, 50, 50, 100, 100);
+        // this.boundingBox2 = new BoundingBox(this, 1780, 500, 100, 100);
+
         /*I'll use this for interactions...
             Interacting with doors, ropes, ect...
          */
 
         this.boundingBox = new BoundingBox(this, 1000, 225, 100, 100);
+        this.boundingBoxKey = new BoundingBox(this, 1900, 520, 75, 75);
+
         // this.boundingBox2 = new BoundingBox(this, 1780, 500, 100, 100);
 
+
     }
-    
+
+
     /*INTERACT */
     interactWithBoundingBox() {
         console.log('Player interacted with the green box');
-this.time.delayedCall(100, () => this.scene.start('Level2'))    }
+        this.time.delayedCall(100, () => this.scene.start('Level2'))
+    }
     // interactWithBoundingBox2() {
     //     console.log('Player interacted with the green box');
     //     this.scene.start('Level3');
@@ -238,13 +268,13 @@ this.time.delayedCall(100, () => this.scene.start('Level2'))    }
     createSpikes() {
         const spikeData = [
             { x: 600, y: -100, key: AssetKeys.LARGE_SPIKE },
-            
+
 
 
 
 
             { x: 920, y: -530, key: AssetKeys.SMALL_SPIKE, flipY: true },
-           
+
 
         ];
 
@@ -354,10 +384,22 @@ this.time.delayedCall(100, () => this.scene.start('Level2'))    }
         if (this.boundingBox.isPlayerOverlapping(this.player) && Phaser.Input.Keyboard.JustDown(this.keyW)) {
             this.interactWithBoundingBox();
         }
+        if (this.boundingBoxKey.isPlayerOverlapping(this.player) && Phaser.Input.Keyboard.JustDown(this.keyW)) {
+            if (this.theKey) {
+                this.theKey.destroy();
+                this.theKey = null;
+                InventoryStore.add('key');
+
+            }
+        }
         // if (this.boundingBox2.isPlayerOverlapping(this.player) && Phaser.Input.Keyboard.JustDown(this.keyW)) {
         //     this.interactWithBoundingBox2();
-        // }
+        // }keyCountText
+        const pumpkinCount = InventoryStore.getQuantity('pumpkin');
+        this.pumpkinCountText.setText('Pumpkin count: ' + pumpkinCount);
 
+        const keyCount = InventoryStore.getQuantity('key');
+        this.keyCountText.setText('key count: ' + keyCount);
 
 
     }

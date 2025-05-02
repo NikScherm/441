@@ -3,6 +3,8 @@ import { BoundingBox } from '../GameObjects/BoundingBox.js';
 import { PlaceableObject } from '../GameObjects/PlaceableObject.js';
 import { GameState } from '../GameObjects/GameState.js';
 import { generateObjectId } from '../GameObjects/IdGenerator.js';
+import { InventoryStore } from '../GameObjects/InventoryStore.js';
+
 //import { level2 } from '../scenes/level2.js';
 
 const AssetKeys = {
@@ -22,6 +24,8 @@ export class Game extends Phaser.Scene {
     }
 
     create() {
+        this.physics.world.createDebugGraphic();
+        this.physics.world.drawDebug = true;
 
         /*Dev mode that will allow me to quickly get to a scene without having to test interactions do levels ect ect...
             When I add other levels i'll just add more letters.
@@ -39,15 +43,13 @@ export class Game extends Phaser.Scene {
         this.pumpkinGroup = this.add.group();
 
 
-
-
-
-
         const { width, height } = this.scale;
         this.bg = this.add.tileSprite(500, 335, width, height, AssetKeys.HOUSE).setScale(1.12);
 
 
         this.boundingBox = new BoundingBox(this, 225, 550, 100, 100);
+        this.boundingBoxHouse = new BoundingBox(this, 550, 550, 100, 100);
+
 
         this.platforms = this.physics.add.staticGroup();
         this.platforms.create(200, 600, 'ground').setAlpha(0).refreshBody();
@@ -79,7 +81,6 @@ export class Game extends Phaser.Scene {
 
             GameState.initializedLevels.add('Game');
         } else {
-            // Recreate pumpkins only if they haven't been picked up
             GameState.levels.Game.placeableObjects.forEach(data => {
                 if (!GameState.inventory.has('pumpkin')) {
                     const obj = new PlaceableObject(this, data.x, data.y, data.key, data.key, data.id);
@@ -113,6 +114,16 @@ export class Game extends Phaser.Scene {
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(0);
+        this.pumpkinCountText = this.add.text(20, 20, 'Pumpkin count: 0', {
+            fontSize: '32px',
+            color: '#ffffff'
+        }).setOrigin(0, 0);
+        this.pumpkinCountText.setScrollFactor(0);
+        this.keyCountText = this.add.text(20, 50, 'Key count: 0', {
+            fontSize: '32px',
+            color: '#ffffff'
+        }).setOrigin(0, 0);
+        this.keyCountText.setScrollFactor(0);
 
     }
     shutdownScene() {
@@ -120,8 +131,13 @@ export class Game extends Phaser.Scene {
     }
 
     interactWithBoundingBox() {
-        console.log('Player interacted with the bounding box!');
         this.time.delayedCall(100, () => this.scene.start('Level2'))
+        this.shutdownScene();
+    }
+    interactWithBoundingBoxHouse() {
+        console.log('Player interacted house box');
+
+        this.time.delayedCall(100, () => this.scene.start('House'))
         this.shutdownScene();
     }
 
@@ -185,6 +201,24 @@ export class Game extends Phaser.Scene {
         if (this.boundingBox.isPlayerOverlapping(this.player) && Phaser.Input.Keyboard.JustDown(this.keyW)) {
             this.interactWithBoundingBox();
         }
+        if (
+            this.boundingBoxHouse.isPlayerOverlapping(this.player) &&
+            Phaser.Input.Keyboard.JustDown(this.keyW)
+        ) {
+            const keyCount = InventoryStore.getQuantity('key');
+
+            if (keyCount === 1) {
+                this.interactWithBoundingBoxHouse();
+            } else {
+                console.log('You need a key to enter');
+            }
+        }
+        const pumpkinCount = InventoryStore.getQuantity('pumpkin');
+        this.pumpkinCountText.setText('Pumpkin count: ' + pumpkinCount);
+
+        const keyCount = InventoryStore.getQuantity('key');
+        this.keyCountText.setText('key count: ' + keyCount);
+
 
     }
 

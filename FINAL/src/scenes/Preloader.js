@@ -9,7 +9,8 @@ const AssetKeys = {
     PLATFORM2: 'platform2',
     BUCKET: 'BUCKET',
     BARREL: 'BARREL',
-    WOOD_PLAT1: 'wood_plat1'
+    WOOD_PLAT1: 'wood_plat1',
+    KEY: 'key'
 
 }
 export class Preloader extends Phaser.Scene {
@@ -59,6 +60,9 @@ export class Preloader extends Phaser.Scene {
 
         this.load.image(AssetKeys.BUCKET, 'assets/bucket.png');
         this.load.image(AssetKeys.BARREL, 'assets/barrel.png');
+        this.load.image(AssetKeys.KEY, 'assets/star.png');
+        this.load.image('Start', 'assets/startscreen.png');
+
 
 
 

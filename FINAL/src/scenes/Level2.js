@@ -235,6 +235,11 @@ export class Level2 extends Phaser.Scene {
             color: '#ffffff'
         }).setOrigin(0, 0);
         this.pumpkinCountText.setScrollFactor(0);
+        this.keyCountText = this.add.text(20, 50, 'Key count: 0', {
+            fontSize: '32px',
+            color: '#ffffff'
+        }).setOrigin(0, 0);
+        this.keyCountText.setScrollFactor(0);
 
         /*I'll use this for interactions...
             Interacting with doors, ropes, ect...
@@ -385,6 +390,9 @@ export class Level2 extends Phaser.Scene {
 
         const pumpkinCount = InventoryStore.getQuantity('pumpkin');
         this.pumpkinCountText.setText('Pumpkin count: ' + pumpkinCount);
+
+        const keyCount = InventoryStore.getQuantity('key');
+        this.keyCountText.setText('key count: ' + keyCount);
 
 
     }
