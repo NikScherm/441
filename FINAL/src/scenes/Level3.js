@@ -38,9 +38,10 @@ export class Level3 extends Phaser.Scene {
     create() {
 
 
+        /*used to see box around physics objects */
 
-        this.physics.world.createDebugGraphic();
-        this.physics.world.drawDebug = true;
+        // this.physics.world.createDebugGraphic();
+        // this.physics.world.drawDebug = true;
 
         this.pumpkinGroup = this.add.group();
         console.log('Level3 objects in GameState:', GameState.levels.Level3.placeableObjects);
@@ -60,7 +61,7 @@ export class Level3 extends Phaser.Scene {
 
 
         /*PLAYER */
-        this.player = new Player(this, 1000, 225);
+        this.player = new Player(this, 1000, 205);
         this.player.setScale(0.7).setDepth(1);
         /*SPIKES  */
         this.spikes = this.physics.add.group();
@@ -156,7 +157,6 @@ export class Level3 extends Phaser.Scene {
         //     OneWayPlatform.create(this, this.platforms2, x, 200, AssetKeys.PLATFORM2);
         // }
         OneWayPlatform.create(this, this.platforms2, 1000, 300, AssetKeys.PLATFORM2);
-
         OneWayPlatform.create(this, this.platforms2, 875, 300, AssetKeys.WOOD_PLAT1);
         OneWayPlatform.create(this, this.platforms2, 1125, 300, AssetKeys.WOOD_PLAT1).setFlipX(true);
         OneWayPlatform.create(this, this.platforms2, 700, 200, AssetKeys.WOOD_PLAT1).setFlipX(true);
@@ -166,56 +166,28 @@ export class Level3 extends Phaser.Scene {
         OneWayPlatform.create(this, this.platforms2, 1800, 230, AssetKeys.WOOD_PLAT1).setFlipX(true);
         OneWayPlatform.create(this, this.platforms2, 1800, 330, AssetKeys.WOOD_PLAT1).setFlipX(true);
         OneWayPlatform.create(this, this.platforms2, 1800, 430, AssetKeys.WOOD_PLAT1).setFlipX(true);
-                OneWayPlatform.create(this, this.platforms2, 1800, 530, AssetKeys.WOOD_PLAT1).setFlipX(true);
-
-                OneWayPlatform.create(this, this.platforms2, 1600, 280, AssetKeys.WOOD_PLAT1);
-
-
+        OneWayPlatform.create(this, this.platforms2, 1800, 530, AssetKeys.WOOD_PLAT1).setFlipX(true);
+        OneWayPlatform.create(this, this.platforms2, 1600, 280, AssetKeys.WOOD_PLAT1);
         OneWayPlatform.create(this, this.platforms2, 275, 180, AssetKeys.WOOD_PLAT1);
         OneWayPlatform.create(this, this.platforms2, 275, 280, AssetKeys.WOOD_PLAT1);
         OneWayPlatform.create(this, this.platforms2, 25, 350, AssetKeys.WOOD_PLAT1).setFlipX(true);
         OneWayPlatform.create(this, this.platforms2, 25, 180, AssetKeys.WOOD_PLAT1).setFlipX(true);
 
-
-
-
-
-
-
-
-
-
         /*platforms1 */
-        //this.platforms.create(793, 540, AssetKeys.PLATFORM1);aaaa
         this.platforms.create(400, 100, AssetKeys.PLATFORM1)
             .setDisplaySize(50, 250)
             .setOrigin(0.5, 0.5)
             .refreshBody();
-        // this.platforms.create(1000, 500, AssetKeys.PLATFORM1);
-        // this.platforms.create(1700, 500, AssetKeys.PLATFORM1);
         this.platforms.create(420, 250, AssetKeys.PLATFORM1);
 
         this.platforms.create(620, 275, AssetKeys.PLATFORM1)
             .setDisplaySize(50, 200)
             .setOrigin(0.5, 0.5)
             .refreshBody();
-
-
-
-
-
-
         this.platforms.create(1700, 500, AssetKeys.PLATFORM1)
             .setDisplaySize(100, 600)
             .setOrigin(0.5, 0.5)
             .refreshBody();
-
-
-
-        // this.platforms.create(1700, 500, AssetKeys.PLATFORM1)
-        //     .setDisplaySize(100, 550)
-        //     .setOrigin(0.5, 0.5)
-        //     .refreshBody();s
         for (let x = 600; x <= 2000; x += 200) {
             this.platforms.create(x, 650, AssetKeys.PLATFORM1).setAlpha(1).refreshBody();
         }
@@ -328,7 +300,35 @@ export class Level3 extends Phaser.Scene {
         this.boundingBoxKey = new BoundingBox(this, 1900, 520, 75, 75);
 
         // this.boundingBox2 = new BoundingBox(this, 1780, 500, 100, 100);
+        this.add.image(1000, 250, 'cave').setScale(1.6);
 
+        this.add.image(1000, 270, 'flowers_var1');
+        this.add.image(900, 375, 'lantern');
+        this.add.image(1100, 375, 'lantern');
+        this.add.image(1150, 365, 'banner');
+        this.add.image(850, 365, 'banner');
+                this.add.image(1600, 340, 'banner').setFlipX(true);
+
+        this.add.image(500, 400, 'lantern');
+        this.add.image(150, 480, 'tree').setScale(0.6).setFlipX(true);
+        this.add.image(1700, 135, 'tree').setScale(0.8).setFlipX(true);
+
+
+
+
+        for (let x = 600; x <= 1500; x += 250) {
+            this.add.image(x, 530, 'flowers_var1');
+        }
+        for (let x = 600; x <= 1400; x += 250) {
+            this.add.image(x, 530, 'flowers_var2');
+        }
+
+
+
+
+        // this.add.image(x, y, 'flower');
+
+        // this.add.image(x, y, 'flower');
 
     }
 

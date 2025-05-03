@@ -33,9 +33,9 @@ export class Level2 extends Phaser.Scene {
     }
 
     create() {
-
-        this.physics.world.createDebugGraphic();
-        this.physics.world.drawDebug = true;
+        /*used to see box around physics objects */
+        // this.physics.world.createDebugGraphic();
+        // this.physics.world.drawDebug = true;
 
         this.pumpkinGroup = this.add.group();
         console.log('Level2 objects in GameState:', GameState.levels.Level2.placeableObjects);
@@ -43,6 +43,9 @@ export class Level2 extends Phaser.Scene {
 
         const { width, height } = this.scale;
         this.bg = this.add.tileSprite(0, -225, 2000, height, AssetKeys.BACKGROUND).setOrigin(0, 0).setScale(2);
+
+
+
 
         //this.bg = this.add.tileSprite(500, 335, width, height, AssetKeys.BACKGROUND).setScale(1.6);
 
@@ -57,6 +60,7 @@ export class Level2 extends Phaser.Scene {
 
         /*PLAYER */
         this.player = new Player(this, 50, 50);
+
         this.player.setScale(0.7).setDepth(1);
         /*SPIKES  */
         this.spikes = this.physics.add.group();
@@ -160,7 +164,7 @@ export class Level2 extends Phaser.Scene {
         }
 
         /*COLLIDER */
-        
+
 
 
         this.physics.add.collider(this.barrels, this.platforms);
@@ -228,7 +232,10 @@ export class Level2 extends Phaser.Scene {
 
 
         /*TEXT */
+        /*level name */
         this.add.text(200, height / 2, 'The Underground', {
+            stroke: '#000000', strokeThickness: 2,
+
             fontSize: '32px',
             color: '#ffffff'
         }).setOrigin(0.5);
@@ -250,6 +257,41 @@ export class Level2 extends Phaser.Scene {
 
         this.boundingBox = new BoundingBox(this, 50, 50, 100, 100);
         this.boundingBox2 = new BoundingBox(this, 1780, 500, 100, 100);
+
+        /*decorations that add no function */
+        this.add.image(450, 165, 'flowers_var1');
+        this.add.image(100, 165, 'flowers_var1');
+        this.add.image(425, 165, 'flowers_var1');
+
+        this.add.image(800, 430, 'flowers_var1');
+        this.add.image(550, 430, 'flowers_var2');
+        this.add.image(570, 430, 'flowers_var2');
+        this.add.image(580, 430, 'flowers_var2');
+        this.add.image(650, 430, 'flowers_var2');
+
+
+        // this.add.image(110, 300, 'flowers_var1');
+
+        this.add.image(320, 170, 'flowers_var2');
+        this.add.image(1580, 220, 'flowers_var2');
+        this.add.image(1580, 220, 'flowers_var1');
+        this.add.image(1200, 425, 'flowers_var1');
+        this.add.image(1200, 50, 'lantern');
+        this.add.image(680, 275, 'lantern');
+        this.add.image(1780, 400, 'banner');
+
+
+
+
+
+        this.add.image(300, 335, 'tree');
+        this.add.image(120, 500, 'tree').setScale(0.5).setFlipX(true);
+        this.add.image(1600, 140, 'tree');
+
+        this.add.image(1750, 510, 'cave').setScale(1.5);
+
+
+
     }
 
     /*INTERACT */
@@ -260,7 +302,7 @@ export class Level2 extends Phaser.Scene {
     }
     interactWithBoundingBox2() {
         console.log('Player interacted with the green box');
-       this.time.delayedCall(100, () => this.scene.start('Level3'))
+        this.time.delayedCall(100, () => this.scene.start('Level3'))
     }
     createSpikes() {
         const spikeData = [

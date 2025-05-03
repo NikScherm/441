@@ -26,13 +26,19 @@ export class Game extends Phaser.Scene {
     create() {
         this.walls = this.physics.add.staticGroup();
 
-        this.physics.world.createDebugGraphic();
-        this.physics.world.drawDebug = true;
+        /*used to see box around physics objects */
+        // this.physics.world.createDebugGraphic();
+        // this.physics.world.drawDebug = true;
 
         /*Dev mode that will allow me to quickly get to a scene without having to test interactions do levels ect ect...
             When I add other levels i'll just add more letters.
          */
+        this.input.keyboard.on('keydown-M', () => { 
+            console.log("going to menu");
 
+            this.scene.start('Menu');
+
+        });
         this.input.keyboard.on('keydown-L', () => {
             console.log("going to lvl3");
 
@@ -52,6 +58,13 @@ export class Game extends Phaser.Scene {
 
         const { width, height } = this.scale;
         this.bg = this.add.tileSprite(500, 335, width, height, AssetKeys.HOUSE).setScale(1.12);
+        /*decoration assets no function */
+        this.add.image(450, 500, 'flowers_var1');
+        this.add.image(700, 480, 'flowers_var1');
+        this.add.image(550, 510, 'flowers_var2');
+        this.add.image(320, 480, 'flowers_var2');
+
+
 
 
         this.boundingBox = new BoundingBox(this, 225, 550, 100, 100);
@@ -121,7 +134,7 @@ export class Game extends Phaser.Scene {
         this.keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
         this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
-        this.add.text(width / 50, height / 6, 'A, D for left/right.\nW for interact.\nX & C for pickup/drop.\n\n "Oh no, I have dropped\nmey key in the well !"', {
+        this.help = this.add.text(width / 50, height / 6, 'A, D for left/right.\nW for interact.\nX & C for pickup/drop.\n\n "Enter the house !"', {
             fontFamily: 'Arial Black', fontSize: 18, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
@@ -202,10 +215,10 @@ export class Game extends Phaser.Scene {
             });
 
             this.physics.add.collider(pumpkin, this.platforms);
-                        this.physics.add.collider(pumpkin, this.walls);
+            this.physics.add.collider(pumpkin, this.walls);
 
             this.physics.add.collider(this.player, pumpkin);
-            
+
 
             this.player.inventory.remove('pumpkin');
             console.log('Placed down a pumpkin');
@@ -226,6 +239,8 @@ export class Game extends Phaser.Scene {
                 this.interactWithBoundingBoxHouse();
             } else {
                 console.log('You need a key to enter');
+                this.help.setText('You need a key to enter the house \n You may have droppped it\n down the well');
+
             }
         }
         const pumpkinCount = InventoryStore.getQuantity('pumpkin');
@@ -233,6 +248,8 @@ export class Game extends Phaser.Scene {
 
         const keyCount = InventoryStore.getQuantity('key');
         this.keyCountText.setText('key count: ' + keyCount);
+
+
 
 
     }

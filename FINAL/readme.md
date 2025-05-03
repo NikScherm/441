@@ -1,21 +1,26 @@
 https://nikscherm.github.io/441/FINAL
 
 #Platformer puzzle game
-I have decided to do a platformer
-I will be building upon the work I did for HW13 where we used phaser.io lib
+I have made a small puzzle game with a couple level, using some of the visual assets I came up with for another project (called hallow)
+In this game, you spawn in as a little witch and must locate the key by solving very basic puzzles that require you to place pumpkins and move barrels around
 
-I cleaned it up by organizing it into scenes and creating objects to use within them
-For this first push I have made 2 levels where the player can get to and from by interacting with it with the W or up arrow key
+I really enjoyed making this, and being able to use these assets
 
+In this project, overcame a few challenges, solving object persistance between seperate scenes with some singleton and OOP programming, through inventoryStore
+and PlaceableObjects.
+It has taught me just how important it is to make helper functions, refactor, ect... in order to stay organised as you can very quickly get lost
 
-I will be using the assets I made previously
-I plan on making it into a puzzle game where the player must push specific objects into certain locations.
-I will also incorporate simple minigames within that the player must complete to unlock chests ect..
+I'm thankful that you introduced us to all these various libraries and I can see myself experimenting more with phaser.js but also
+three.js in the future, even though I have not used three.js here.
+I will have to restructure the code later on as I now found out that there is a tool for level layout construction called Tiled, which would have
+been useful, instead of adding images and objects manually using coordinates instead of visually through a UI.
 
-keybinds : 
+Anyway, I hope you enjoy this small game !
+#keybinds : 
 A-D || <- -> for left right,
 W For interacting with exits
 S to jump down 1 sided platforms
-C to drop collectibles
 X to pick up collectibles
+
+C to drop collectibles
 

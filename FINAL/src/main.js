@@ -5,6 +5,8 @@ import { Level3 } from './scenes/Level3.js';
 
 import { Game } from './scenes/Game.js';
 import { House } from './scenes/House.js';
+import { Menu } from './scenes/Menu.js';
+
 
 import { GameOver } from './scenes/GameOver.js';
 import { Preloader } from './scenes/Preloader.js';
@@ -29,6 +31,7 @@ const config = {
     scene: [
         Boot,
         Preloader,
+        Menu,
         Game,
         Level2,
         Level3,

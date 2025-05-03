@@ -64,13 +64,13 @@ export class Preloader extends Phaser.Scene {
         this.load.image('Start', 'assets/startscreen.png');
 
 
+        this.load.image('cave', 'assets/cave.png');
+        this.load.image('banner', 'assets/banner.png');
 
 
+        this.load.image('tree', 'assets/tree.png');
         this.load.image('flowers_var1', 'assets/flowers_var1.png');
         this.load.image('flowers_var2', 'assets/flower_var2.png');
-
-
-
         this.load.image('lantern', 'assets/lantern.png');
 
         this.load.image('house', 'assets/house.png');
@@ -97,8 +97,8 @@ export class Preloader extends Phaser.Scene {
     create() {
 
 
-        this.scene.start('Game');
-                // this.scene.start('Menu');
+        this.scene.start('Menu');
+        // this.scene.start('Menu');
 
     }
 }
