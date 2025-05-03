@@ -16,11 +16,11 @@ I will have to restructure the code later on as I now found out that there is a 
 been useful, instead of adding images and objects manually using coordinates instead of visually through a UI.
 
 Anyway, I hope you enjoy this small game !
-#keybinds : 
-A-D || <- -> for left right,
-W For interacting with exits
-S to jump down 1 sided platforms
-X to pick up collectibles
 
-C to drop collectibles
+#New keybinds : 
+•A-D || <- -> for left right,
+•W For interacting with exits
+•S to jump down 1 sided platforms
+•E to pick up collectibles
+•Q to drop collectibles
 

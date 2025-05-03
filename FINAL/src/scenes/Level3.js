@@ -259,8 +259,9 @@ export class Level3 extends Phaser.Scene {
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
-        this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+        this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
+
 
 
         /*TEXT */
@@ -348,7 +349,7 @@ export class Level3 extends Phaser.Scene {
             { x: 425, y: 325, key: AssetKeys.MEDIUM_SPIKE },
 
 
-            { x: 1000, y: 550, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 1000, y: 550, key: AssetKeys.MEDIUM_SPIKE, flipY: true },
 
             { x: 920, y: -530, key: AssetKeys.SMALL_SPIKE, flipY: true },
 
@@ -401,7 +402,7 @@ export class Level3 extends Phaser.Scene {
         it also removes or saves to gamestate to track if it should or shouldn't be in the game scene when loaded.*/
 
 
-        if (Phaser.Input.Keyboard.JustDown(this.keyX)) {
+        if (Phaser.Input.Keyboard.JustDown(this.keyE)) {
             this.placeableObject.forEach((obj, index) => {
                 if (Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), obj.getBounds())) {
 
@@ -426,7 +427,7 @@ export class Level3 extends Phaser.Scene {
 
 
 
-        if (this.player.inventory.has('pumpkin') && Phaser.Input.Keyboard.JustDown(this.keyC)) {
+        if (this.player.inventory.has('pumpkin') && Phaser.Input.Keyboard.JustDown(this.keyQ)) {
             const id = generateObjectId('pumpkin');
             const pumpkin = new PlaceableObject(this, this.player.x, this.player.y, 'pumpkin', 'pumpkin', id);
             pumpkin.setScale(1);

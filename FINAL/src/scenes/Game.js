@@ -131,10 +131,10 @@ export class Game extends Phaser.Scene {
         this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
         this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        this.keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
-        this.keyC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
+        this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
+        this.keyQ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Q);
 
-        this.help = this.add.text(width / 50, height / 6, 'A, D for left/right.\nW for interact.\nX & C for pickup/drop.\n\n "Enter the house !"', {
+        this.help = this.add.text(width / 50, height / 6, 'A, D for left/right.\nW for interact.\nE & Q for pickup/drop.\n\n"Push the pumpkin\nwhile holding E\n to pick it up"\n\n "Press W to\n Enter the house !"', {
             fontFamily: 'Arial Black', fontSize: 18, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
@@ -178,7 +178,7 @@ export class Game extends Phaser.Scene {
         opposite logic for C key press : it will remove it from inventory and inventoryStore and CREATE a new pumpkin at player pos
         it also removes or saves to gamestate to track if it should or shouldn't be in the game scene when loaded.*/
 
-        if (Phaser.Input.Keyboard.JustDown(this.keyX)) {
+        if (Phaser.Input.Keyboard.JustDown(this.keyE)) {
             this.placeableObject.forEach((obj, index) => {
                 if (Phaser.Geom.Intersects.RectangleToRectangle(this.player.getBounds(), obj.getBounds())) {
 
@@ -201,7 +201,7 @@ export class Game extends Phaser.Scene {
 
 
 
-        if (this.player.inventory.has('pumpkin') && Phaser.Input.Keyboard.JustDown(this.keyC)) {
+        if (this.player.inventory.has('pumpkin') && Phaser.Input.Keyboard.JustDown(this.keyQ)) {
             const id = generateObjectId('pumpkin');
             const pumpkin = new PlaceableObject(this, this.player.x, this.player.y, 'pumpkin', 'pumpkin', id);
             pumpkin.setScale(1);
@@ -239,7 +239,7 @@ export class Game extends Phaser.Scene {
                 this.interactWithBoundingBoxHouse();
             } else {
                 console.log('You need a key to enter');
-                this.help.setText('You need a key to enter the house \n You may have droppped it\n down the well');
+                this.help.setText('You need a key to enter the house \n You may have droppped it\n down the well\N Press W to enter the well');
 
             }
         }
