@@ -7,9 +7,7 @@ export class Boot extends Phaser.Scene
 
     preload ()
     {
-        /*Doesn't have a preloader so will have to use smaller assets here */
-
-        this.load.image('background', 'assets/bg.png');
+        this.load.image('Start', 'assets/Start.png');
     }
 
     create ()

@@ -66,7 +66,7 @@ export class Level2 extends Phaser.Scene {
         this.barrels = this.physics.add.group();
 
         const barrelData = [
-            { x: 800, y: 350 }
+            { x: 750, y: 350 }
 
 
         ];
@@ -164,6 +164,8 @@ export class Level2 extends Phaser.Scene {
 
 
         this.physics.add.collider(this.barrels, this.platforms);
+        this.physics.add.collider(this.barrels, this.platforms2);
+
         this.physics.add.collider(this.barrels, this.spikes);
         this.physics.add.collider(this.barrels, this.walls);
         this.physics.add.collider(this.barrels, this.placeableObject);

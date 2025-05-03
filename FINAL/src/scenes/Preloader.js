@@ -19,7 +19,7 @@ export class Preloader extends Phaser.Scene {
     }
 
     init() {
-        this.add.image(512, 384, 'bg');
+        this.add.image(512, 384, 'Start');
 
         this.add.rectangle(512, 384, 468, 32).setStrokeStyle(1, 0xffffff);
 
@@ -55,7 +55,7 @@ export class Preloader extends Phaser.Scene {
 
         this.load.image(AssetKeys.PLATFORM1, 'assets/platform1.png');
         this.load.image(AssetKeys.PLATFORM2, 'assets/platform2.png');
-        this.load.image(AssetKeys.WOOD_PLAT1, 'assets/wood_platform_rota.png');
+        this.load.image(AssetKeys.WOOD_PLAT1, 'assets/wood_platform_var1.png');
 
 
         this.load.image(AssetKeys.BUCKET, 'assets/bucket.png');
@@ -98,5 +98,7 @@ export class Preloader extends Phaser.Scene {
 
 
         this.scene.start('Game');
+                // this.scene.start('Menu');
+
     }
 }

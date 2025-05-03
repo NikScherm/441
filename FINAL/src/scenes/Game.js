@@ -24,6 +24,8 @@ export class Game extends Phaser.Scene {
     }
 
     create() {
+        this.walls = this.physics.add.staticGroup();
+
         this.physics.world.createDebugGraphic();
         this.physics.world.drawDebug = true;
 
@@ -37,7 +39,12 @@ export class Game extends Phaser.Scene {
             this.scene.start('Level3');
 
         });
+        this.input.keyboard.on('keydown-P', () => {
+            console.log("going to lvl3");
 
+            this.scene.start('House');
+
+        });
         /*ADDED PUMPKINS TO A GROUP SO THAT IT CAN LATER BE USED TO COLLIDE WITH SUBSEQUENT ADDED PUMPKINS
         WHILE KEEPING THE PROPERTIES OF "PLACEABLEOBJECT" */
         this.pumpkinGroup = this.add.group();
@@ -89,11 +96,16 @@ export class Game extends Phaser.Scene {
                 }
             });
         }
-
+        const leftWall = this.walls.create(0, 300, 'invisible').setDisplaySize(10, 600).setOrigin(0, 0.5).setVisible(false).refreshBody();;
+        const rightWall = this.walls.create(1000, 300, 'invisible').setDisplaySize(10, 600).setOrigin(0, 0.5).setVisible(false).refreshBody();;
+        const topWall = this.walls.create(1000, 0, 'invisible').setDisplaySize(2000, 10).setOrigin(0.5, 0).setVisible(false).refreshBody();;
+        this.physics.add.collider(this.player, this.walls);
 
         this.placeableObject.forEach(obj => {
             this.physics.add.collider(obj, this.platforms);
             this.physics.add.collider(this.player, obj);
+            this.physics.add.collider(obj, this.walls);
+
         });
 
 
@@ -190,7 +202,10 @@ export class Game extends Phaser.Scene {
             });
 
             this.physics.add.collider(pumpkin, this.platforms);
+                        this.physics.add.collider(pumpkin, this.walls);
+
             this.physics.add.collider(this.player, pumpkin);
+            
 
             this.player.inventory.remove('pumpkin');
             console.log('Placed down a pumpkin');

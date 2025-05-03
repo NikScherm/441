@@ -37,6 +37,8 @@ export class Level3 extends Phaser.Scene {
 
     create() {
 
+
+
         this.physics.world.createDebugGraphic();
         this.physics.world.drawDebug = true;
 
@@ -68,7 +70,18 @@ export class Level3 extends Phaser.Scene {
         this.barrels = this.physics.add.group();
 
         const barrelData = [
-            { x: 800, y: 350 }
+            { x: 1200, y: 515 },
+            { x: 1252, y: 515 },
+            { x: 1226, y: 450 },
+
+
+
+            { x: 743, y: 148 },
+            { x: 743, y: 248 },
+            { x: 55, y: 500 }
+
+
+
 
 
         ];
@@ -93,7 +106,19 @@ export class Level3 extends Phaser.Scene {
             const pumpkinData = [
                 { x: 50, y: 290, key: 'pumpkin' },
                 { x: 300, y: 450, key: 'pumpkin' },
-                { x: 1475, y: 500, key: 'pumpkin' }
+                { x: 330, y: 20, key: 'pumpkin' },
+                { x: 475, y: 20, key: 'pumpkin' },
+                { x: 743, y: 348, key: 'pumpkin' },
+                { x: 25, y: 125, key: 'pumpkin' },
+
+
+
+                { x: 1475, y: 500, key: 'pumpkin' },
+                { x: 1527, y: 500, key: 'pumpkin' },
+
+                { x: 1501, y: 430, key: 'pumpkin' }
+
+
             ];
 
             pumpkinData.forEach(data => {
@@ -132,21 +157,69 @@ export class Level3 extends Phaser.Scene {
         // }
         OneWayPlatform.create(this, this.platforms2, 1000, 300, AssetKeys.PLATFORM2);
 
+        OneWayPlatform.create(this, this.platforms2, 875, 300, AssetKeys.WOOD_PLAT1);
+        OneWayPlatform.create(this, this.platforms2, 1125, 300, AssetKeys.WOOD_PLAT1).setFlipX(true);
+        OneWayPlatform.create(this, this.platforms2, 700, 200, AssetKeys.WOOD_PLAT1).setFlipX(true);
+        OneWayPlatform.create(this, this.platforms2, 700, 300, AssetKeys.WOOD_PLAT1).setFlipX(true);
+        OneWayPlatform.create(this, this.platforms2, 700, 400, AssetKeys.WOOD_PLAT1).setFlipX(true);
+
+        OneWayPlatform.create(this, this.platforms2, 1800, 230, AssetKeys.WOOD_PLAT1).setFlipX(true);
+        OneWayPlatform.create(this, this.platforms2, 1800, 330, AssetKeys.WOOD_PLAT1).setFlipX(true);
+        OneWayPlatform.create(this, this.platforms2, 1800, 430, AssetKeys.WOOD_PLAT1).setFlipX(true);
+                OneWayPlatform.create(this, this.platforms2, 1800, 530, AssetKeys.WOOD_PLAT1).setFlipX(true);
+
+                OneWayPlatform.create(this, this.platforms2, 1600, 280, AssetKeys.WOOD_PLAT1);
+
+
+        OneWayPlatform.create(this, this.platforms2, 275, 180, AssetKeys.WOOD_PLAT1);
+        OneWayPlatform.create(this, this.platforms2, 275, 280, AssetKeys.WOOD_PLAT1);
+        OneWayPlatform.create(this, this.platforms2, 25, 350, AssetKeys.WOOD_PLAT1).setFlipX(true);
+        OneWayPlatform.create(this, this.platforms2, 25, 180, AssetKeys.WOOD_PLAT1).setFlipX(true);
+
+
+
+
+
+
+
 
 
 
         /*platforms1 */
-        //this.platforms.create(793, 540, AssetKeys.PLATFORM1);
+        //this.platforms.create(793, 540, AssetKeys.PLATFORM1);aaaa
+        this.platforms.create(400, 100, AssetKeys.PLATFORM1)
+            .setDisplaySize(50, 250)
+            .setOrigin(0.5, 0.5)
+            .refreshBody();
+        // this.platforms.create(1000, 500, AssetKeys.PLATFORM1);
+        // this.platforms.create(1700, 500, AssetKeys.PLATFORM1);
+        this.platforms.create(420, 250, AssetKeys.PLATFORM1);
+
+        this.platforms.create(620, 275, AssetKeys.PLATFORM1)
+            .setDisplaySize(50, 200)
+            .setOrigin(0.5, 0.5)
+            .refreshBody();
 
 
 
 
 
-        // this.platforms.create(965, 0, AssetKeys.PLATFORM1)
-        //     .setDisplaySize(200, 300)
+
+        this.platforms.create(1700, 500, AssetKeys.PLATFORM1)
+            .setDisplaySize(100, 600)
+            .setOrigin(0.5, 0.5)
+            .refreshBody();
+
+
+
+        // this.platforms.create(1700, 500, AssetKeys.PLATFORM1)
+        //     .setDisplaySize(100, 550)
         //     .setOrigin(0.5, 0.5)
-        //     .refreshBody();
-        for (let x = 0; x <= 2000; x += 200) {
+        //     .refreshBody();s
+        for (let x = 600; x <= 2000; x += 200) {
+            this.platforms.create(x, 650, AssetKeys.PLATFORM1).setAlpha(1).refreshBody();
+        }
+        for (let x = 0; x <= 200; x += 200) {
             this.platforms.create(x, 650, AssetKeys.PLATFORM1).setAlpha(1).refreshBody();
         }
         /*COLLISIONS */
@@ -156,6 +229,10 @@ export class Level3 extends Phaser.Scene {
 
 
         this.physics.add.collider(this.barrels, this.platforms);
+        this.physics.add.collider(this.barrels, this.platforms2);
+        this.physics.add.collider(this.barrels, this.barrels);
+
+
         this.physics.add.collider(this.barrels, this.spikes);
         this.physics.add.collider(this.barrels, this.walls);
         this.physics.add.collider(this.barrels, this.placeableObject);
@@ -233,14 +310,14 @@ export class Level3 extends Phaser.Scene {
             fontSize: '16px',
             color: '#ffffff'
         }).setOrigin(0.5);
-        
+
 
         /*I'll use this for interactions...
             Interacting with doors, ropes, ect...
          */
-        this.add.image(50, 50, AssetKeys.BUCKET).setScale(1.8);
+        // this.add.image(50, 50, AssetKeys.BUCKET).setScale(1.8);
 
-        this.boundingBox = new BoundingBox(this, 50, 50, 100, 100);
+        // this.boundingBox = new BoundingBox(this, 50, 50, 100, 100);
         // this.boundingBox2 = new BoundingBox(this, 1780, 500, 100, 100);
 
         /*I'll use this for interactions...
@@ -267,13 +344,23 @@ export class Level3 extends Phaser.Scene {
     // }
     createSpikes() {
         const spikeData = [
-            { x: 600, y: -100, key: AssetKeys.LARGE_SPIKE },
+            { x: 375, y: 325, key: AssetKeys.MEDIUM_SPIKE },
+            { x: 425, y: 325, key: AssetKeys.MEDIUM_SPIKE },
 
 
-
-
+            { x: 1000, y: 550, key: AssetKeys.SMALL_SPIKE, flipY: true },
 
             { x: 920, y: -530, key: AssetKeys.SMALL_SPIKE, flipY: true },
+
+            { x: 325, y: 600, key: AssetKeys.SMALL_SPIKE, flipY: true },
+
+            { x: 350, y: 600, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 375, y: 600, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 400, y: 600, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 425, y: 600, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 450, y: 600, key: AssetKeys.SMALL_SPIKE, flipY: true },
+            { x: 475, y: 600, key: AssetKeys.SMALL_SPIKE, flipY: true },
+
 
 
         ];
@@ -300,7 +387,6 @@ export class Level3 extends Phaser.Scene {
 
 
     update() {
-
 
         this.player.move();
 
@@ -400,6 +486,7 @@ export class Level3 extends Phaser.Scene {
 
         const keyCount = InventoryStore.getQuantity('key');
         this.keyCountText.setText('key count: ' + keyCount);
+
 
 
     }
